@@ -11,6 +11,7 @@ public:
 private:
     bool running;
     SDL_Surface *screen;
+    SDL_Surface *background;
     const int SCREEN_WIDTH = 800;
     const int SCREEN_HEIGHT = 600;
 
@@ -20,10 +21,5 @@ private:
     void logic();
     void render();
     void cleanUp();
-
-    // вспомогательные функции
-    SDL_Surface *loadImage(std::string fileName);
-    void applySurface(int x, int y, SDL_Surface *source,
-            SDL_Surface *destination, SDL_Rect *clip = nullptr);
 };
 #endif // GAME_H

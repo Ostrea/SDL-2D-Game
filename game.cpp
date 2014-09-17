@@ -1,10 +1,11 @@
 #include "game.h"
 #include <iostream>
-#include "SDL/SDL_image.h"
+#include "functions.h"
 
 Game::Game() {
     running = true;
     screen = nullptr;
+    background = nullptr;
 }
 
 int Game::execute() {
@@ -36,11 +37,20 @@ bool Game::init() {
         std::cerr << "Не удалось создать окно.\n";
         return false;
     }
+    background = loadImage("/home/ostrea/Programs/Labs_second_term/"
+            "Gushin/Coursework_third_try/images/nebula_brown.png");
+    if (background == nullptr) {
+        std::cerr << "Не удалось загрузить фон.\n";
+        return false;
+    }
     return true;
 }
 
 void Game::handleEvents(SDL_Event &event) {
     if (event.type == SDL_QUIT) {
+        running = false;
+    }
+    if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_ESCAPE) {
         running = false;
     }
 }
@@ -50,29 +60,11 @@ void Game::logic() {
 }
 
 void Game::render() {
+    applySurface(0, 0, background, screen);
     SDL_Flip(screen);
 }
 
 void Game::cleanUp() {
+    SDL_FreeSurface(background);
     SDL_Quit();
-}
-
-SDL_Surface *Game::loadImage(std::string fileName) {
-    SDL_Surface *loadedImage = IMG_Load(fileName.c_str());
-    SDL_Surface *optimizedImage {nullptr};
-
-    if (loadedImage != nullptr) {
-        // создается оптимизированная поверхность
-        optimizedImage = SDL_DisplayFormatAlpha(loadedImage);
-
-        SDL_FreeSurface(loadedImage);
-    }
-
-    return optimizedImage;
-}
-
-void Game::applySurface(int x, int y, SDL_Surface *source,
-        SDL_Surface *destination, SDL_Rect *clip) {
-    SDL_Rect offset{static_cast<Sint16>(x), static_cast<Sint16>(y)};
-    SDL_BlitSurface(source, clip, destination, &offset);
 }
