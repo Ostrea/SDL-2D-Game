@@ -3,15 +3,19 @@
 
 #include "SDL/SDL.h"
 #include <string>
+#include "background.h"
 
 class Game {
+
 public:
     Game();
     int execute();
+
 private:
     bool running;
     SDL_Surface *screen;
-    SDL_Surface *background;
+    Background background;
+//    SDL_Surface *background;
     const int SCREEN_WIDTH = 800;
     const int SCREEN_HEIGHT = 600;
 
