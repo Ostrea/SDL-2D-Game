@@ -1,7 +1,8 @@
 cmake_minimum_required(VERSION 2.8.4)
 project(coursework_third_try)
 
-set(SOURCE_FILES main.cpp game.cpp functions.cpp staticgraphicalelement.cpp background.cpp)
+set(SOURCE_FILES main.cpp game.cpp functions.cpp staticgraphicalelement.cpp background.cpp
+movablegraphicalelement.h)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
