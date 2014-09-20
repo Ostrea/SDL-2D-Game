@@ -1,15 +1,17 @@
 #include "background.h"
 #include "functions.h"
 
-Background::Background(int x, int y) {
-    this->x = x;
-    this->y = y;
+Background::Background(int x, int y) : StaticGraphicalElement(x, y) {
 }
 
 Background::~Background() {
 }
 
-void Background::initialize() {
+bool Background::initialize() {
     surface = loadImage("/home/ostrea/Programs/Labs_second_term/"
             "Gushin/Coursework_third_try/images/nebula_brown.png");
+    return surface != nullptr;
+}
+
+void Background::logic() {
 }

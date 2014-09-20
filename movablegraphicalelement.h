@@ -6,14 +6,13 @@
 class MovableGraphicalElement {
 
 public:
+    MovableGraphicalElement(double velocityX, double velocityY);
     virtual void handleEvents(SDL_Event &event) = 0;
-    virtual void logic() = 0;
-    virtual ~MovableGraphicalElement() {}
+    virtual ~MovableGraphicalElement();
 
 protected:
     double velocityX;
     double velocityY;
-    bool alive;
 };
 
-#endif
+#endif // MOVABLEGRAPHICALELEMENT_H

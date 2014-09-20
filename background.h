@@ -8,7 +8,8 @@ class Background : public StaticGraphicalElement {
 public:
     Background(int x, int y);
     ~Background();
-    void initialize();
+    bool initialize();
+    void logic();
 };
 
 #endif // BACKGROUND_H

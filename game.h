@@ -4,6 +4,9 @@
 #include "SDL/SDL.h"
 #include <string>
 #include "background.h"
+#include "player.h"
+#include <list>
+#include <memory>
 
 class Game {
 
@@ -14,10 +17,14 @@ public:
 private:
     bool running;
     SDL_Surface *screen;
-    Background background;
-//    SDL_Surface *background;
     const int SCREEN_WIDTH = 800;
     const int SCREEN_HEIGHT = 600;
+
+    // основные объекты
+    std::shared_ptr<Background> background;
+    std::shared_ptr<Player> player;
+
+    std::list<std::shared_ptr<StaticGraphicalElement>> allElements;
 
     // основные функции
     bool init();

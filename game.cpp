@@ -1,7 +1,10 @@
 #include "game.h"
 #include <iostream>
 
-Game::Game() : background{0, 0} {
+Game::Game() {
+    background = std::make_shared<Background>(0, 0);
+    player = std::make_shared<Player>(SCREEN_WIDTH / 2 -40, SCREEN_HEIGHT - 100,
+    SCREEN_WIDTH, allElements);
     running = true;
     screen = nullptr;
 }
@@ -13,12 +16,18 @@ int Game::execute() {
 
     SDL_Event event;
     while (running) {
+        Uint32 currentTicks = SDL_GetTicks();
         while (SDL_PollEvent(&event)) {
             handleEvents(event);
         }
 
         logic();
         render();
+
+        Uint32 ticks = SDL_GetTicks() - currentTicks;
+        if (ticks < 1000 / 60 ) {
+            SDL_Delay((1000 / 60) - ticks);
+        }
     }
 
     cleanUp();
@@ -27,7 +36,7 @@ int Game::execute() {
 
 bool Game::init() {
     if (SDL_Init(SDL_INIT_EVERYTHING) < 0) {
-        std::cerr << "Не удалось запустить СДЛ.\n";
+        std::cerr << "Не удалось запустить SDL.\n";
         return false;
     }
 
@@ -37,11 +46,27 @@ bool Game::init() {
         return false;
     }
 
-    background.initialize();
+    SDL_WM_SetCaption("Hunting", nullptr);
+
+    if (!background->initialize()) {
+        std::cerr << "Не удалось создать объект фона\n";
+        return false;
+    }
+
+    if (!player->initialize()) {
+        std::cerr << "Не удалось создать игрока\n";
+        return false;
+    }
+
+    allElements.push_back(background);
+    allElements.push_back(player);
+
     return true;
 }
 
 void Game::handleEvents(SDL_Event &event) {
+    player->handleEvents(event);
+
     if (event.type == SDL_QUIT) {
         running = false;
     }
@@ -51,11 +76,15 @@ void Game::handleEvents(SDL_Event &event) {
 }
 
 void Game::logic() {
-
+    for (auto element : allElements) {
+        element->logic();
+    }
 }
 
 void Game::render() {
-    background.render(screen);
+    for (auto element : allElements) {
+        element->render(screen);
+    }
     SDL_Flip(screen);
 }
 

@@ -1,7 +1,10 @@
 #include "staticgraphicalelement.h"
 #include "functions.h"
 
-void StaticGraphicalElement::render(SDL_Surface *screen) {
+StaticGraphicalElement::StaticGraphicalElement(int x, int y) : x{x}, y{y} {
+}
+
+void StaticGraphicalElement::render(SDL_Surface *screen) const {
     applySurface(x, y, surface, screen);
 }
 
