@@ -11,6 +11,7 @@ public:
     virtual void render(SDL_Surface *screen) const;
     virtual bool initialize() = 0;
     virtual void logic() = 0;
+    virtual void collisionDetection() = 0;
 
 protected:
     SDL_Surface *surface;

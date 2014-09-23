@@ -15,3 +15,6 @@ bool Background::initialize() {
 
 void Background::logic() {
 }
+
+void Background::collisionDetection() {
+}

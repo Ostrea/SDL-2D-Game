@@ -48,7 +48,10 @@ Player::~Player() {
 }
 
 void Player::shoot() {
-    std::shared_ptr<Bullet> bullet = std::make_shared<Bullet>(x + 42, y, -1);
+    std::shared_ptr<Bullet> bullet = std::make_shared<Bullet>(x + 42, y, -3);
     bullet->initialize();
     allElements.push_back(bullet);
+}
+
+void Player::collisionDetection() {
 }

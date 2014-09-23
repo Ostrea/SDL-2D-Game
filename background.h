@@ -10,6 +10,7 @@ public:
     ~Background();
     bool initialize();
     void logic();
+    void collisionDetection();
 };
 
 #endif // BACKGROUND_H

@@ -16,10 +16,11 @@ public:
     void logic();
     bool initialize();
     void shoot();
+    void collisionDetection();
     ~Player();
 
 private:
-    const double ACCELERATION = 1;
+    const double ACCELERATION = 3;
     const int SCREEN_WIDTH;
     std::list<std::shared_ptr<StaticGraphicalElement>> &allElements;
 };

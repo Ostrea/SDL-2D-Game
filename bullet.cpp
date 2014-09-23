@@ -21,3 +21,6 @@ MovableGraphicalElement{0, velocityY} {
 
 Bullet::~Bullet() {
 }
+
+void Bullet::collisionDetection() {
+}

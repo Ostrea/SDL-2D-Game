@@ -12,6 +12,7 @@ public:
     void handleEvents(SDL_Event &event);
     void logic();
     bool initialize();
+    void collisionDetection();
 
 private:
     bool alive;

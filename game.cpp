@@ -77,6 +77,9 @@ void Game::handleEvents(SDL_Event &event) {
 
 void Game::logic() {
     for (auto element : allElements) {
+        element->collisionDetection();
+    }
+    for (auto element : allElements) {
         element->logic();
     }
 }
