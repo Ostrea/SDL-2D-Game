@@ -14,6 +14,8 @@ public:
     bool initialize();
     void collisionDetection();
 
+    virtual bool isAlive() override;
+
 private:
     bool alive;
 };

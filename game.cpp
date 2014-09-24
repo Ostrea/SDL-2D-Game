@@ -2,6 +2,8 @@
 #include "animal.h"
 #include "timer.h"
 #include <iostream>
+#include <chrono>
+#include <random>
 
 Game::Game() {
     background = std::make_shared<Background>(0, 0);
@@ -9,6 +11,7 @@ Game::Game() {
     SCREEN_WIDTH, allElements);
     running = true;
     screen = nullptr;
+    currentNumberOfAnimals = 0;
 }
 
 int Game::execute() {
@@ -35,6 +38,8 @@ int Game::execute() {
 
         logic();
         render();
+
+        removeDeadSprites();
 
         Uint32 ticks = fpsTimer.getTicks();
         if (ticks < 1000 / 60 ) {
@@ -108,11 +113,34 @@ void Game::cleanUp() {
 }
 
 void Game::createAnimal() {
-    int x {350};
-    int y {260};
-    double velocityX {1};
-    double velocityY {1};
-    std::shared_ptr<Animal> animal = std::make_shared<Animal>(x, y, velocityX, velocityY);
-    animal->initialize();
-    allElements.push_back(animal);
+    if (currentNumberOfAnimals <= NUMBER_OF_ANIMALS) {
+        unsigned int seed = std::chrono::system_clock::now().time_since_epoch().count();
+        std::minstd_rand0 generator(seed);
+        std::uniform_int_distribution<int> distributionX(100, SCREEN_WIDTH - 100);
+        std::uniform_int_distribution<int> distributionY(100, SCREEN_HEIGHT - 195);
+        std::uniform_int_distribution<int> distributionVelocity(1, 2);
+        auto getX = std::bind(distributionX, generator);
+        auto getY = std::bind(distributionY, generator);
+        auto getVelocity = std::bind(distributionVelocity, generator);
+
+        int x{getX()};
+        int y{getY()};
+        double velocityX{static_cast<double>(getVelocity())};
+        std::shared_ptr<Animal> animal = std::make_shared<Animal>(x, y, velocityX,
+                SCREEN_WIDTH, SCREEN_HEIGHT);
+        animal->initialize();
+        allElements.push_back(animal);
+    }
+
+}
+
+void Game::removeDeadSprites() {
+    auto element = allElements.begin();
+    while (element != allElements.end()) {
+        if (!(*element)->isAlive()) {
+            element = allElements.erase(element);
+        } else {
+            element++;
+        }
+    }
 }

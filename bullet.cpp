@@ -6,6 +6,9 @@ void Bullet::handleEvents(SDL_Event& event){
 
 void Bullet::logic() {
     y += velocityY;
+    if (y < 0) {
+        this->alive = false;
+    }
 }
 
 bool Bullet::initialize() {
@@ -23,4 +26,9 @@ Bullet::~Bullet() {
 }
 
 void Bullet::collisionDetection() {
+
+}
+
+bool Bullet::isAlive() {
+    return alive;
 }

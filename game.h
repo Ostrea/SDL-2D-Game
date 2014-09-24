@@ -15,9 +15,14 @@ public:
 
 private:
     bool running;
+    int currentNumberOfAnimals;
+
     SDL_Surface *screen;
+
+    // константы
     const int SCREEN_WIDTH = 800;
     const int SCREEN_HEIGHT = 600;
+    const int NUMBER_OF_ANIMALS = 12;
 
     // основные объекты
     std::shared_ptr<Background> background;
@@ -32,5 +37,7 @@ private:
     void render();
     void cleanUp();
     void createAnimal();
+
+    void removeDeadSprites();
 };
 #endif // GAME_H

@@ -9,7 +9,7 @@ class Animal : public StaticGraphicalElement, public MovableGraphicalElement {
 public:
     virtual void handleEvents(SDL_Event &event) override;
 
-    Animal(int x, int y, double velocityX, double velocityY);
+    Animal(int x, int y, double velocityX, int width, int height);
 
     virtual ~Animal();
 
@@ -21,8 +21,12 @@ public:
 
     virtual void collisionDetection() override;
 
+    virtual bool isAlive() override;
+
 private:
     bool alive;
+    const int SCREEN_WIDTH;
+    const int SCREEN_HEIGHT;
 };
 
 #endif // ANIMAL_H

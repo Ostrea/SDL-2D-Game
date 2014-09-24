@@ -13,6 +13,8 @@ public:
     virtual void logic() = 0;
     virtual void collisionDetection() = 0;
 
+    virtual bool isAlive();
+
 protected:
     SDL_Surface *surface;
     int x;

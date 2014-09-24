@@ -39,9 +39,11 @@ bool Player::initialize() {
 }
 
 Player::Player(int x, int y, const int width,
-        std::list<std::shared_ptr<StaticGraphicalElement>> &allElements) :
+        std::list<std::shared_ptr<StaticGraphicalElement>> &allElements)
+        :
         StaticGraphicalElement{x, y},
 MovableGraphicalElement{0, 0}, SCREEN_WIDTH{width}, allElements{allElements} {
+
 }
 
 Player::~Player() {

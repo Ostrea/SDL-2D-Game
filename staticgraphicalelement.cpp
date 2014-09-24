@@ -11,3 +11,7 @@ void StaticGraphicalElement::render(SDL_Surface *screen) const {
 StaticGraphicalElement::~StaticGraphicalElement() {
     SDL_FreeSurface(surface);
 }
+
+bool StaticGraphicalElement::isAlive() {
+    return true;
+}

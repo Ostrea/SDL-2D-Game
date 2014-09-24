@@ -5,8 +5,10 @@ void Animal::handleEvents(SDL_Event& event){
 
 }
 
-Animal::Animal(int x, int y, double velocityX, double velocityY) : StaticGraphicalElement(x, y),
-MovableGraphicalElement(velocityX, velocityY){
+Animal::Animal(int x, int y, double velocityX, int width, int height) : StaticGraphicalElement(x, y),
+                                                                        MovableGraphicalElement(velocityX, 0),
+                                                                        SCREEN_WIDTH{width},
+                                                                        SCREEN_HEIGHT{height} {
     alive = true;
 }
 
@@ -25,13 +27,19 @@ bool Animal::initialize() {
 }
 
 void Animal::logic() {
-    // getting out of the map. Need to do this, cause % has sign of dividender (standart C++11)
-    x = (x % SCREEN_WIDTH + SCREEN_WIDTH) % SCREEN_WIDTH;
-    y = (y % SCREEN_HEIGHT + SCREEN_HEIGHT) % SCREEN_HEIGHT;
+
     x += velocityX;
     y += velocityY;
+
+    // выход за карту и возвращение в нее. Приходится писать таким образом из-за того,
+    // что % имеет знак делимого (стандарт C++11)
+    x = (x % SCREEN_WIDTH + SCREEN_WIDTH) % SCREEN_WIDTH;
 }
 
 void Animal::collisionDetection() {
 
+}
+
+bool Animal::isAlive() {
+    return alive;
 }
