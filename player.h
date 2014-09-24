@@ -12,12 +12,16 @@ class Player : public MovableGraphicalElement, public StaticGraphicalElement {
 public:
     Player(int x, int y, const int width,
             std::list<std::shared_ptr<StaticGraphicalElement>> &allElements);
-    void handleEvents(SDL_Event &event);
-    void logic();
-    bool initialize();
+
+    virtual void handleEvents(SDL_Event &event) override;
+
+    virtual void logic() override;
+
+    virtual bool initialize() override;
+
     void shoot();
-    void collisionDetection();
-    ~Player();
+
+    virtual void collisionDetection() override;
 
 private:
     const double ACCELERATION = 3;

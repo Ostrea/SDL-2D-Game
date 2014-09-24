@@ -1,7 +1,7 @@
 #ifndef STATICGRAPHICALELEMENT_H
 #define STATICGRAPHICALELEMENT_H
 
-#include "SDL/SDL.h"
+#include <SDL/SDL.h>
 
 class StaticGraphicalElement {
 

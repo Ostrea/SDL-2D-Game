@@ -1,5 +1,5 @@
 #include "functions.h"
-#include "SDL/SDL_image.h"
+#include <SDL/SDL_image.h>
 
 SDL_Surface *loadImage(std::string fileName) {
     SDL_Surface *loadedImage = IMG_Load(fileName.c_str());

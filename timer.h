@@ -5,8 +5,11 @@ class Timer {
 
 public:
     Timer();
+
     void start();
+
     Uint32 getTicks();
+
 private:
     Uint32 startTicks;
     bool running;

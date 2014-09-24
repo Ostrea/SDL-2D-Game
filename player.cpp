@@ -39,14 +39,9 @@ bool Player::initialize() {
 }
 
 Player::Player(int x, int y, const int width,
-        std::list<std::shared_ptr<StaticGraphicalElement>> &allElements)
-        :
-        StaticGraphicalElement{x, y},
-MovableGraphicalElement{0, 0}, SCREEN_WIDTH{width}, allElements{allElements} {
+        std::list<std::shared_ptr<StaticGraphicalElement>> &allElements) : StaticGraphicalElement{x, y},
+                            MovableGraphicalElement{0, 0}, SCREEN_WIDTH{width}, allElements{allElements} {
 
-}
-
-Player::~Player() {
 }
 
 void Player::shoot() {
@@ -56,4 +51,5 @@ void Player::shoot() {
 }
 
 void Player::collisionDetection() {
+
 }
