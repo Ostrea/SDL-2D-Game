@@ -12,14 +12,6 @@ Animal::Animal(int x, int y, double velocityX, int width, int height) : StaticGr
     alive = true;
 }
 
-Animal::~Animal() {
-
-}
-
-void Animal::render(SDL_Surface *screen) const {
-    StaticGraphicalElement::render(screen);
-}
-
 bool Animal::initialize() {
     surface = loadImage("/home/ostrea/Programs/Labs_second_term/"
             "Gushin/Coursework_third_try/images/asteroid_blue.png");

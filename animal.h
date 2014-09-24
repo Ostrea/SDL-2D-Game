@@ -11,10 +11,6 @@ public:
 
     Animal(int x, int y, double velocityX, int width, int height);
 
-    virtual ~Animal();
-
-    virtual void render(SDL_Surface *screen) const override;
-
     virtual bool initialize() override;
 
     virtual void logic() override;

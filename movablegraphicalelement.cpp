@@ -5,4 +5,5 @@ MovableGraphicalElement::MovableGraphicalElement(double velocityX, double veloci
 }
 
 MovableGraphicalElement::~MovableGraphicalElement() {
+
 }

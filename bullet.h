@@ -8,11 +8,14 @@ class Bullet : public StaticGraphicalElement, public MovableGraphicalElement {
 
 public:
     Bullet(int x, int y, double velocityY);
-    ~Bullet();
-    void handleEvents(SDL_Event &event);
-    void logic();
-    bool initialize();
-    void collisionDetection();
+
+    virtual void handleEvents(SDL_Event &event) override;
+
+    virtual void logic() override;
+
+    virtual bool initialize() override;
+
+    virtual void collisionDetection() override;
 
     virtual bool isAlive() override;
 
