@@ -2,6 +2,7 @@
 #include "functions.h"
 
 StaticGraphicalElement::StaticGraphicalElement(int x, int y) : x{x}, y{y} {
+
 }
 
 void StaticGraphicalElement::render(SDL_Surface *screen) const {

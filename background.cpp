@@ -2,9 +2,11 @@
 #include "functions.h"
 
 Background::Background(int x, int y) : StaticGraphicalElement(x, y) {
+
 }
 
 Background::~Background() {
+
 }
 
 bool Background::initialize() {
@@ -14,7 +16,9 @@ bool Background::initialize() {
 }
 
 void Background::logic() {
+
 }
 
 void Background::collisionDetection() {
+
 }
