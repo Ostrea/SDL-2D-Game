@@ -1,6 +1,6 @@
 #include "game.h"
 
 int main() {
-    Game a;
-    return a.execute();
+    Game game;
+    return game.execute();
 }

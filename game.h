@@ -2,7 +2,6 @@
 #define GAME_H
 
 #include "SDL/SDL.h"
-#include <string>
 #include "background.h"
 #include "player.h"
 #include <list>
@@ -32,5 +31,6 @@ private:
     void logic();
     void render();
     void cleanUp();
+    void createAnimal();
 };
 #endif // GAME_H

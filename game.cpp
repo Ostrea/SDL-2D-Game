@@ -1,4 +1,6 @@
 #include "game.h"
+#include "animal.h"
+#include "timer.h"
 #include <iostream>
 
 Game::Game() {
@@ -14,17 +16,27 @@ int Game::execute() {
         return -1;
     }
 
+    Timer fpsTimer;
+    Timer animalTimer;
+    animalTimer.start();
+
     SDL_Event event;
     while (running) {
-        Uint32 currentTicks = SDL_GetTicks();
+        fpsTimer.start();
+
         while (SDL_PollEvent(&event)) {
             handleEvents(event);
+        }
+
+        if (animalTimer.getTicks() > 2000) {
+            createAnimal();
+            animalTimer.start();
         }
 
         logic();
         render();
 
-        Uint32 ticks = SDL_GetTicks() - currentTicks;
+        Uint32 ticks = fpsTimer.getTicks();
         if (ticks < 1000 / 60 ) {
             SDL_Delay((1000 / 60) - ticks);
         }
@@ -93,4 +105,14 @@ void Game::render() {
 
 void Game::cleanUp() {
     SDL_Quit();
+}
+
+void Game::createAnimal() {
+    int x {350};
+    int y {260};
+    double velocityX {1};
+    double velocityY {1};
+    std::shared_ptr<Animal> animal = std::make_shared<Animal>(x, y, velocityX, velocityY);
+    animal->initialize();
+    allElements.push_back(animal);
 }
