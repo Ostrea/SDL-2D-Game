@@ -23,12 +23,11 @@ public:
 
     void makeDead();
 
-    int getX();
-
-    int getY();
+    SDL_Rect getCollisionRectangle() const;
 
 private:
     bool alive;
+    SDL_Rect collisionRectangle;
 };
 
 #endif // BULLET_H
