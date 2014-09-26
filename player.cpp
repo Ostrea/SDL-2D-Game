@@ -38,9 +38,11 @@ bool Player::initialize() {
     return surface != nullptr;
 }
 
-Player::Player(int x, int y, const int width,
-        std::list<std::shared_ptr<StaticGraphicalElement>> &allElements) : StaticGraphicalElement{x, y},
-                            MovableGraphicalElement{0, 0}, SCREEN_WIDTH{width}, allElements{allElements} {
+Player::Player(int x, int y, const int width, std::list<std::shared_ptr<StaticGraphicalElement>> &allElements,
+        std::list<std::shared_ptr<Bullet>> &bullets)
+        : StaticGraphicalElement{x, y},
+          MovableGraphicalElement{0, 0}, SCREEN_WIDTH{width}, allElements{allElements},
+          bullets{bullets}{
 
 }
 
@@ -48,6 +50,7 @@ void Player::shoot() {
     std::shared_ptr<Bullet> bullet = std::make_shared<Bullet>(x + 42, y, -3);
     bullet->initialize();
     allElements.push_back(bullet);
+    bullets.push_back(bullet);
 }
 
 void Player::collisionDetection() {

@@ -1,5 +1,4 @@
 #include "game.h"
-#include "animal.h"
 #include "timer.h"
 #include <iostream>
 #include <chrono>
@@ -8,7 +7,7 @@
 Game::Game() {
     background = std::make_shared<Background>(0, 0);
     player = std::make_shared<Player>(SCREEN_WIDTH / 2 -40, SCREEN_HEIGHT - 100,
-    SCREEN_WIDTH, allElements);
+    SCREEN_WIDTH, allElements, bullets);
     running = true;
     screen = nullptr;
     currentNumberOfAnimals = 0;
@@ -93,9 +92,10 @@ void Game::handleEvents(SDL_Event &event) {
 }
 
 void Game::logic() {
-    for (auto element : allElements) {
-        element->collisionDetection();
-    }
+    numberOfCollisionsAnimalsBullets();
+//    for (auto element : allElements) {
+//        element->collisionDetection();
+//    }
     for (auto element : allElements) {
         element->logic();
     }
@@ -130,6 +130,7 @@ void Game::createAnimal() {
                 SCREEN_WIDTH, SCREEN_HEIGHT);
         animal->initialize();
         allElements.push_back(animal);
+        animals.push_back(animal);
     }
 
 }
@@ -143,4 +144,45 @@ void Game::removeDeadSprites() {
             element++;
         }
     }
+
+    auto element2 = animals.begin();
+    while (element2 != animals.end()) {
+        if (!(*element2)->isAlive()) {
+            element2 = animals.erase(element2);
+        } else {
+            element2++;
+        }
+    }
+
+    auto element3 = bullets.begin();
+    while (element3 != bullets.end()) {
+        if (!(*element3)->isAlive()) {
+            element3 = bullets.erase(element3);
+        } else {
+            element3++;
+        }
+    }
+}
+
+bool Game::haveAnimalCollidedWithBullet(std::shared_ptr<Bullet> bullet) {
+    for (auto animal : animals) {
+        if (animal->isAlive()) {
+            if (animal->isCollided(bullet)) {
+                animal->makeDead();
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
+int Game::numberOfCollisionsAnimalsBullets() {
+    int count {0};
+    for (auto bullet : bullets) {
+        if (haveAnimalCollidedWithBullet(bullet)) {
+            bullet->makeDead();
+            count++;
+        }
+    }
+    return count;
 }

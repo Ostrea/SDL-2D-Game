@@ -4,6 +4,8 @@
 #include "staticgraphicalelement.h"
 #include "movablegraphicalelement.h"
 
+class Animal;
+
 class Bullet : public StaticGraphicalElement, public MovableGraphicalElement {
 
 public:
@@ -18,6 +20,12 @@ public:
     virtual void collisionDetection() override;
 
     virtual bool isAlive() override;
+
+    void makeDead();
+
+    int getX();
+
+    int getY();
 
 private:
     bool alive;

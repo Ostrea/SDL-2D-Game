@@ -30,3 +30,15 @@ void Bullet::collisionDetection() {
 bool Bullet::isAlive() {
     return alive;
 }
+
+void Bullet::makeDead() {
+    alive = false;
+}
+
+int Bullet::getX() {
+    return x;
+}
+
+int Bullet::getY() {
+    return y;
+}
