@@ -46,9 +46,36 @@ bool Animal::isAlive() {
 
 bool Animal::isCollided(std::shared_ptr<Bullet> bullet) {
     SDL_Rect bulletRectangle = bullet->getCollisionRectangle();
-    if (x + 45 == bulletRectangle.x) {
-        return true;
+//    if (x + 45 == bulletRectangle.x) {
+//        return true;
+//    }
+
+    int leftA = collisionRectangle.x;
+    int rightA = collisionRectangle.x + collisionRectangle.w;
+    int topA = collisionRectangle.y;
+    int bottomA = collisionRectangle.y + collisionRectangle.h;
+
+    int leftB = bulletRectangle.x;
+    int rightB = bulletRectangle.x + bulletRectangle.w;
+    int topB = bulletRectangle.y;
+    int bottomB = bulletRectangle.y + bulletRectangle.h;
+//    leftA = A.x; rightA = A.x + A.w; topA = A.y;
+//    bottomA = A.y + A.h;
+//    leftB = B.x; rightB = B.x + B.w; topB = B.y; bottomB = B.y + B.h;
+
+    if (bottomA <= topB) {
+        return false;
     }
+    if (topA >= bottomB) {
+        return false;
+    }
+    if (rightA <= leftB) {
+        return false;
+    }
+    if (leftA >= rightB) {
+        return false;
+    }
+    return true;
 //    if (x > bulletRectangle.x && x < bulletRectangle.x + bulletRectangle.w &&
 //            y < bulletRectangle.y && y > bulletRectangle.y + bulletRectangle.h) {
 //        return true;
