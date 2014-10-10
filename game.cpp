@@ -9,7 +9,7 @@ Game::Game() {
     player = std::make_shared<Player>(SCREEN_WIDTH / 2 -40, SCREEN_HEIGHT - 100,
     SCREEN_WIDTH, allElements, bullets);
     running = true;
-    screen = nullptr;
+    canvas = nullptr;
     currentNumberOfAnimals = 0;
 }
 
@@ -56,8 +56,8 @@ bool Game::init() {
         return false;
     }
 
-    screen = SDL_SetVideoMode(SCREEN_WIDTH, SCREEN_HEIGHT, 32, SDL_HWSURFACE | SDL_DOUBLEBUF);
-    if (screen == nullptr) {
+    canvas = SDL_SetVideoMode(SCREEN_WIDTH, SCREEN_HEIGHT, 32, SDL_HWSURFACE | SDL_DOUBLEBUF);
+    if (canvas == nullptr) {
         std::cerr << "Не удалось создать окно.\n";
         return false;
     }
@@ -103,9 +103,9 @@ void Game::logic() {
 
 void Game::render() {
     for (auto element : allElements) {
-        element->render(screen);
+        element->render(canvas);
     }
-    SDL_Flip(screen);
+    SDL_Flip(canvas);
 }
 
 void Game::cleanUp() {

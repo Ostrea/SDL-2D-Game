@@ -18,7 +18,7 @@ private:
     bool running;
     int currentNumberOfAnimals;
 
-    SDL_Surface *screen;
+    SDL_Surface *canvas;
 
     // константы
     const int SCREEN_WIDTH = 800;
