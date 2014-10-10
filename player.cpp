@@ -53,6 +53,3 @@ void Player::shoot() {
     bullets.push_back(bullet);
 }
 
-void Player::collisionDetection() {
-
-}

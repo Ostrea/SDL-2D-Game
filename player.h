@@ -21,8 +21,6 @@ public:
 
     void shoot();
 
-    virtual void collisionDetection() override;
-
 private:
     const double ACCELERATION = 3;
     const int SCREEN_WIDTH;

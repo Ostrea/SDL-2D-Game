@@ -10,11 +10,10 @@ public:
 
     ~Background();
 
-    bool initialize();
+    virtual bool initialize() override;
 
-    void logic();
+    virtual void logic() override;
 
-    void collisionDetection();
 };
 
 #endif // BACKGROUND_H

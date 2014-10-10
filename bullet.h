@@ -17,8 +17,6 @@ public:
 
     virtual bool initialize() override;
 
-    virtual void collisionDetection() override;
-
     virtual bool isAlive() override;
 
     void makeDead();

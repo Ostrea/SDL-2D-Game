@@ -18,8 +18,6 @@ public:
 
     virtual void logic() override;
 
-    virtual void collisionDetection() override;
-
     virtual bool isAlive() override;
 
     bool isCollided(std::shared_ptr<Bullet> bullet);

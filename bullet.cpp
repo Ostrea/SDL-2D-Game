@@ -28,10 +28,6 @@ MovableGraphicalElement{0, velocityY} {
     collisionRectangle.h = 10;
 }
 
-void Bullet::collisionDetection() {
-
-}
-
 bool Bullet::isAlive() {
     return alive;
 }

@@ -14,7 +14,7 @@ Animal::Animal(int x, int y, double velocityX, int width, int height) : StaticGr
     collisionRectangle.x = x;
     collisionRectangle.y = y;
     collisionRectangle.w = 45;
-    collisionRectangle.h = 45;
+    collisionRectangle.h = 60;
 }
 
 bool Animal::initialize() {
@@ -35,16 +35,14 @@ void Animal::logic() {
     collisionRectangle.y = y;
 }
 
-void Animal::collisionDetection() {
-
-}
-
 bool Animal::isAlive() {
     return alive;
 }
 
 bool Animal::isCollided(std::shared_ptr<Bullet> bullet) {
     SDL_Rect bulletRectangle = bullet->getCollisionRectangle();
+//    return ( ( x >= bulletRectangle.x && x <= bulletRectangle.x + bulletRectangle.w )
+//            && ( y >= bulletRectangle.y && y <= bulletRectangle.y + bulletRectangle.h ) );
 
     int leftA = collisionRectangle.x;
     int rightA = collisionRectangle.x + collisionRectangle.w;
