@@ -1,9 +1,9 @@
 #ifndef BACKGROUND_H
 #define BACKGROUND_H
 
-#include "staticgraphicalelement.h"
+#include "drawableelement.h"
 
-class Background : public StaticGraphicalElement {
+class Background : public DrawableElement {
 
 public:
     Background(int x, int y);
@@ -12,7 +12,7 @@ public:
 
     virtual bool initialize() override;
 
-    virtual void logic() override;
+    virtual void update() override;
 
 };
 

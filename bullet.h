@@ -1,31 +1,35 @@
 #ifndef BULLET_H
 #define BULLET_H
 
-#include "staticgraphicalelement.h"
-#include "movablegraphicalelement.h"
+#include "drawableelement.h"
+#include "controllableelement.h"
 
 class Animal;
 
-class Bullet : public StaticGraphicalElement, public MovableGraphicalElement {
+class Bullet : public DrawableElement, public ControllableElement {
 
 public:
     Bullet(int x, int y, double velocityY);
 
-    virtual void handleEvents(SDL_Event &event) override;
+    virtual void handleEvents(SDL_Event const &event) override;
 
-    virtual void logic() override;
+    virtual void update() override;
 
     virtual bool initialize() override;
 
-    virtual bool isAlive() override;
+    virtual bool isAlive() const override;
 
     void makeDead();
 
-    SDL_Rect getCollisionRectangle() const;
+    SDL_Rect getCollisionRectangle() const {
+        return collisionRectangle;
+    }
 
 private:
     bool alive;
     SDL_Rect collisionRectangle;
+public:
+    virtual void draw() const override;
 };
 
 #endif // BULLET_H

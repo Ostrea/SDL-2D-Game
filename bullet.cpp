@@ -1,11 +1,11 @@
 #include "bullet.h"
 #include "functions.h"
 
-void Bullet::handleEvents(SDL_Event& event){
+void Bullet::handleEvents(SDL_Event const &event){
 
 }
 
-void Bullet::logic() {
+void Bullet::update() {
     y += velocityY;
     collisionRectangle.y = y;
     if (y < 0) {
@@ -19,8 +19,9 @@ bool Bullet::initialize() {
     return surface != nullptr;
 }
 
-Bullet::Bullet(int x, int y, double velocityY) : StaticGraphicalElement{x, y},
-MovableGraphicalElement{0, velocityY} {
+Bullet::Bullet(int x, int y, double velocityY) : DrawableElement{x, y} {
+    velocityX = 0;
+    this->velocityY = velocityY;
     alive = true;
     collisionRectangle.x = x;
     collisionRectangle.y = y;
@@ -28,7 +29,7 @@ MovableGraphicalElement{0, velocityY} {
     collisionRectangle.h = 10;
 }
 
-bool Bullet::isAlive() {
+bool Bullet::isAlive() const{
     return alive;
 }
 
@@ -36,6 +37,10 @@ void Bullet::makeDead() {
     alive = false;
 }
 
-SDL_Rect Bullet::getCollisionRectangle() const {
-    return collisionRectangle;
+// TODO delete after testing (base class draw does all needed work)
+void Bullet::draw() const {
+    SDL_Rect tempRect = collisionRectangle;
+    auto screen = SDL_GetVideoSurface();
+    SDL_FillRect(screen, &tempRect, SDL_MapRGB(screen->format, 255, 255, 255));
+    DrawableElement::draw();
 }

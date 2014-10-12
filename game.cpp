@@ -5,16 +5,17 @@
 #include <random>
 
 Game::Game() {
-    background = std::make_shared<Background>(0, 0);
+    allElements.push_back(std::make_shared<Background>(0, 0));
     player = std::make_shared<Player>(SCREEN_WIDTH / 2 -40, SCREEN_HEIGHT - 100,
     SCREEN_WIDTH, allElements, bullets);
+    allElements.push_back(player);
     running = true;
     canvas = nullptr;
     currentNumberOfAnimals = 0;
 }
 
-int Game::execute() {
-    if (!init()) {
+int Game::run() {
+    if (!initialize()) {
         return -1;
     }
 
@@ -35,10 +36,8 @@ int Game::execute() {
             animalTimer.start();
         }
 
-        logic();
-        render();
-
-        removeDeadSprites();
+        update();
+        draw();
 
         Uint32 ticks = fpsTimer.getTicks();
         if (ticks < 1000 / 60 ) {
@@ -50,7 +49,7 @@ int Game::execute() {
     return 0;
 }
 
-bool Game::init() {
+bool Game::initialize() {
     if (SDL_Init(SDL_INIT_EVERYTHING) < 0) {
         std::cerr << "Не удалось запустить SDL.\n";
         return false;
@@ -64,25 +63,23 @@ bool Game::init() {
 
     SDL_WM_SetCaption("Hunting", nullptr);
 
-    if (!background->initialize()) {
-        std::cerr << "Не удалось создать объект фона\n";
-        return false;
+    for (auto element : allElements) {
+        element->initialize();
     }
-
-    if (!player->initialize()) {
-        std::cerr << "Не удалось создать игрока\n";
-        return false;
-    }
-
-    allElements.push_back(background);
-    allElements.push_back(player);
 
     return true;
 }
 
-void Game::handleEvents(SDL_Event &event) {
+void Game::handleEvents(SDL_Event const &event) {
     player->handleEvents(event);
 
+    if (event.type == SDL_USEREVENT) {
+        std::shared_ptr<Bullet> bullet = std::make_shared<Bullet>(player->getX() + 42,
+                player->getY(), -3);
+        bullet->initialize();
+        allElements.push_back(bullet);
+        bullets.push_back(bullet);
+    }
     if (event.type == SDL_QUIT) {
         running = false;
     }
@@ -91,19 +88,20 @@ void Game::handleEvents(SDL_Event &event) {
     }
 }
 
-void Game::logic() {
+void Game::update() {
     numberOfCollisionsAnimalsBullets();
 //    for (auto element : allElements) {
 //        element->collisionDetection();
 //    }
     for (auto element : allElements) {
-        element->logic();
+        element->update();
     }
+    removeDeadElements();
 }
 
-void Game::render() {
+void Game::draw() {
     for (auto element : allElements) {
-        element->render(canvas);
+        element->draw();
     }
     SDL_Flip(canvas);
 }
@@ -113,7 +111,7 @@ void Game::cleanUp() {
 }
 
 void Game::createAnimal() {
-    if (currentNumberOfAnimals <= NUMBER_OF_ANIMALS) {
+    if (currentNumberOfAnimals <= MAXIMUM_NUMBER_OF_ANIMALS) {
         unsigned int seed = std::chrono::system_clock::now().time_since_epoch().count();
         std::minstd_rand0 generator(seed);
         std::uniform_int_distribution<int> distributionX(100, SCREEN_WIDTH - 100);
@@ -135,7 +133,7 @@ void Game::createAnimal() {
 
 }
 
-void Game::removeDeadSprites() {
+void Game::removeDeadElements() {
     auto element = allElements.begin();
     while (element != allElements.end()) {
         if (!(*element)->isAlive()) {

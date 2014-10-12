@@ -1,7 +1,7 @@
 #ifndef FUNCTIONS_H
 #define FUNCTIONS_H
 
-#include <SDL/SDL.h>
+#include "SDL/SDL.h"
 #include <string>
 
 SDL_Surface *loadImage(std::string fileName);

@@ -1,7 +1,7 @@
 #include "background.h"
 #include "functions.h"
 
-Background::Background(int x, int y) : StaticGraphicalElement(x, y) {
+Background::Background(int x, int y) : DrawableElement(x, y) {
 
 }
 
@@ -15,6 +15,6 @@ bool Background::initialize() {
     return surface != nullptr;
 }
 
-void Background::logic() {
+void Background::update() {
 
 }

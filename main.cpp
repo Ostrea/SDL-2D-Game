@@ -2,5 +2,5 @@
 
 int main() {
     Game game;
-    return game.execute();
+    return game.run();
 }
