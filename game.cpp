@@ -5,10 +5,10 @@
 #include <random>
 
 Game::Game() {
-    allElements.push_back(std::make_shared<Background>(0, 0));
-    player = std::make_shared<Player>(SCREEN_WIDTH / 2 -40, SCREEN_HEIGHT - 100,
-    SCREEN_WIDTH, allElements, bullets);
+    allElements.push_back(std::make_shared<Background>(0, 0, contentManager));
+    player = std::make_shared<Player>(SCREEN_WIDTH / 2 -40, SCREEN_HEIGHT - 100, contentManager);
     allElements.push_back(player);
+
     running = true;
     canvas = nullptr;
     currentNumberOfAnimals = 0;
@@ -60,22 +60,26 @@ bool Game::initialize() {
         std::cerr << "Не удалось создать окно.\n";
         return false;
     }
-
     SDL_WM_SetCaption("Hunting", nullptr);
 
+    contentManager.loadContent();
+
     for (auto element : allElements) {
-        element->initialize();
+        if (!element->initialize()) {
+            std::cerr << "Что-то пошло не так: " << SDL_GetError();
+            return false;
+        }
     }
 
     return true;
 }
 
 void Game::handleEvents(SDL_Event const &event) {
-    player->handleEvents(event);
+    player->handleInput(event);
 
     if (event.type == SDL_USEREVENT) {
         std::shared_ptr<Bullet> bullet = std::make_shared<Bullet>(player->getX() + 42,
-                player->getY(), -3);
+                player->getY(), -3, contentManager);
         bullet->initialize();
         allElements.push_back(bullet);
         bullets.push_back(bullet);
@@ -90,9 +94,6 @@ void Game::handleEvents(SDL_Event const &event) {
 
 void Game::update() {
     numberOfCollisionsAnimalsBullets();
-//    for (auto element : allElements) {
-//        element->collisionDetection();
-//    }
     for (auto element : allElements) {
         element->update();
     }
@@ -107,6 +108,7 @@ void Game::draw() {
 }
 
 void Game::cleanUp() {
+    contentManager.unloadContent();
     SDL_Quit();
 }
 
@@ -124,8 +126,7 @@ void Game::createAnimal() {
         int x{getX()};
         int y{getY()};
         double velocityX{static_cast<double>(getVelocity())};
-        std::shared_ptr<Animal> animal = std::make_shared<Animal>(x, y, velocityX,
-                SCREEN_WIDTH, SCREEN_HEIGHT);
+        std::shared_ptr<Animal> animal = std::make_shared<Animal>(x, y, velocityX, contentManager);
         animal->initialize();
         allElements.push_back(animal);
         animals.push_back(animal);

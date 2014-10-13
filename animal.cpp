@@ -1,14 +1,8 @@
 #include "animal.h"
-#include "functions.h"
 #include "bullet.h"
 
-void Animal::handleEvents(SDL_Event const &event){
-
-}
-
-Animal::Animal(int x, int y, double velocityX, int width, int height) : DrawableElement(x, y),
-                                                                        SCREEN_WIDTH{width},
-                                                                        SCREEN_HEIGHT{height} {
+Animal::Animal(int x, int y, double velocityX, ContentManager const &contentManager) : DrawableElement(x, y),
+        contentManager(contentManager) {
     velocityY = 0;
     this->velocityX = velocityX;
     alive = true;
@@ -16,11 +10,13 @@ Animal::Animal(int x, int y, double velocityX, int width, int height) : Drawable
     collisionRectangle.y = y + 5;
     collisionRectangle.w = 75;
     collisionRectangle.h = 78;
+    surface = nullptr;
 }
 
 bool Animal::initialize() {
-    surface = loadImage("/home/ostrea/Programs/Labs_second_term/"
-            "Gushin/Coursework_third_try/images/asteroid_blue.png");
+    surface = contentManager.getAnimal();
+//    surface = loadImage("/home/ostrea/Programs/Labs_second_term/"
+//            "Gushin/Coursework_third_try/images/asteroid_blue.png");
     return surface != nullptr;
 }
 
@@ -30,7 +26,8 @@ void Animal::update() {
 
     // выход за карту и возвращение в нее. Приходится писать таким образом из-за того,
     // что % имеет знак делимого (стандарт C++11)
-    x = (x % SCREEN_WIDTH + SCREEN_WIDTH) % SCREEN_WIDTH;
+    int screenWidth = SDL_GetVideoSurface()->w;
+    x = (x % screenWidth + screenWidth) % screenWidth;
 
     collisionRectangle.x = x + 5;
     collisionRectangle.y = y + 5;

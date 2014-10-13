@@ -7,13 +7,12 @@
 #include <list>
 #include <memory>
 
-class Player : public ControllableElement, public DrawableElement {
+class Player : public ControllableElement, public DrawableElement, public MovableElement {
 
 public:
-    Player(int x, int y, const int width, std::list<std::shared_ptr<DrawableElement>> &allElements,
-            std::list<std::shared_ptr<Bullet>> &bullets);
+    Player(int x, int y, ContentManager const &contentManager);
 
-    virtual void handleEvents(SDL_Event const &event) override;
+    virtual void handleInput(SDL_Event const &event) override;
 
     virtual void update() override;
 
@@ -31,9 +30,7 @@ public:
 
 private:
     const double ACCELERATION = 3;
-    const int SCREEN_WIDTH;
-    std::list<std::shared_ptr<DrawableElement>> &allElements;
-    std::list<std::shared_ptr<Bullet>> &bullets;
+    ContentManager const &contentManager;
 };
 
 #endif // PLAYER_H

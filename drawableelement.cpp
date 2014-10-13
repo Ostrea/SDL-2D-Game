@@ -11,7 +11,7 @@ void DrawableElement::draw() const {
 }
 
 DrawableElement::~DrawableElement() {
-    SDL_FreeSurface(surface);
+
 }
 
 bool DrawableElement::isAlive() const {

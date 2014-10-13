@@ -3,23 +3,27 @@
 
 #include "drawableelement.h"
 #include "controllableelement.h"
+#include "movableelement.h"
+#include "contentmanager.h"
 
 class Animal;
 
-class Bullet : public DrawableElement, public ControllableElement {
+class Bullet : public DrawableElement, public MovableElement {
 
 public:
-    Bullet(int x, int y, double velocityY);
-
-    virtual void handleEvents(SDL_Event const &event) override;
+    Bullet(int x, int y, double velocityY, ContentManager const &contentManager);
 
     virtual void update() override;
 
     virtual bool initialize() override;
 
-    virtual bool isAlive() const override;
+    virtual bool isAlive() const override {
+        return alive;
+    }
 
-    void makeDead();
+    void makeDead() {
+        alive = false;
+    }
 
     SDL_Rect getCollisionRectangle() const {
         return collisionRectangle;
@@ -28,6 +32,8 @@ public:
 private:
     bool alive;
     SDL_Rect collisionRectangle;
+    ContentManager const &contentManager;
+
 public:
     virtual void draw() const override;
 };

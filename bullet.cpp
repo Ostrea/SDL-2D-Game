@@ -1,10 +1,6 @@
 #include "bullet.h"
 #include "functions.h"
 
-void Bullet::handleEvents(SDL_Event const &event){
-
-}
-
 void Bullet::update() {
     y += velocityY;
     collisionRectangle.y = y;
@@ -14,12 +10,14 @@ void Bullet::update() {
 }
 
 bool Bullet::initialize() {
-    surface = loadImage("/home/ostrea/Programs/Labs_second_term/"
-            "Gushin/Coursework_third_try/images/shot1.png");
+    surface = contentManager.getBullet();
+//    surface = loadImage("/home/ostrea/Programs/Labs_second_term/"
+//            "Gushin/Coursework_third_try/images/shot1.png");
     return surface != nullptr;
 }
 
-Bullet::Bullet(int x, int y, double velocityY) : DrawableElement{x, y} {
+Bullet::Bullet(int x, int y, double velocityY, ContentManager const &contentManager) : DrawableElement{x, y},
+      contentManager(contentManager) {
     velocityX = 0;
     this->velocityY = velocityY;
     alive = true;
@@ -27,14 +25,6 @@ Bullet::Bullet(int x, int y, double velocityY) : DrawableElement{x, y} {
     collisionRectangle.y = y;
     collisionRectangle.w = 10;
     collisionRectangle.h = 10;
-}
-
-bool Bullet::isAlive() const{
-    return alive;
-}
-
-void Bullet::makeDead() {
-    alive = false;
 }
 
 // TODO delete after testing (base class draw does all needed work)

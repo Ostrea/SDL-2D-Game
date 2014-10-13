@@ -6,7 +6,7 @@
 class ControllableElement {
 
 public:
-    virtual void handleEvents(SDL_Event const &event) = 0;
+    virtual void handleInput(SDL_Event const &event) = 0;
 
     virtual ~ControllableElement() {}
 };

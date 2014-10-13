@@ -3,16 +3,16 @@
 
 #include "drawableelement.h"
 #include "controllableelement.h"
+#include "movableelement.h"
+#include "contentmanager.h"
 #include <memory>
 
 class Bullet;
 
-class Animal : public DrawableElement, public ControllableElement {
+class Animal : public DrawableElement, public MovableElement {
 
 public:
-    virtual void handleEvents(SDL_Event const &event) override;
-
-    Animal(int x, int y, double velocityX, int width, int height);
+    Animal(int x, int y, double velocityX, ContentManager const &contentManager);
 
     virtual bool initialize() override;
 
@@ -26,9 +26,9 @@ public:
 
 private:
     bool alive;
-    const int SCREEN_WIDTH;
-    const int SCREEN_HEIGHT;
     SDL_Rect collisionRectangle;
+    ContentManager const &contentManager;
+
 public:
     virtual void draw() const override;
 };

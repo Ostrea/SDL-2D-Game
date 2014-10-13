@@ -1,17 +1,12 @@
 #include "background.h"
-#include "functions.h"
 
-Background::Background(int x, int y) : DrawableElement(x, y) {
-
-}
-
-Background::~Background() {
-
+Background::Background(int x, int y, ContentManager const &contentManager) : DrawableElement(x, y),
+                contentManager(contentManager){
+    surface = nullptr;
 }
 
 bool Background::initialize() {
-    surface = loadImage("/home/ostrea/Programs/Labs_second_term/"
-            "Gushin/Coursework_third_try/images/nebula_brown.png");
+    surface = contentManager.getBackground();
     return surface != nullptr;
 }
 

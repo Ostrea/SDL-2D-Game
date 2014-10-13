@@ -7,6 +7,7 @@
 #include "animal.h"
 #include <list>
 #include <memory>
+#include "contentmanager.h"
 
 class Game {
 
@@ -17,8 +18,8 @@ public:
 
 private:
     bool running;
-
     SDL_Surface *canvas;
+    ContentManager contentManager;
 
     // константы
     const int SCREEN_WIDTH = 800;
