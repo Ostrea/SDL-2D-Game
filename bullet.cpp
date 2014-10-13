@@ -10,8 +10,6 @@ void Bullet::update() {
 
 bool Bullet::initialize() {
     surface = contentManager.getBullet();
-//    surface = loadImage("/home/ostrea/Programs/Labs_second_term/"
-//            "Gushin/Coursework_third_try/images/shot1.png");
     return surface != nullptr;
 }
 
