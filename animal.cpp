@@ -15,8 +15,6 @@ Animal::Animal(int x, int y, double velocityX, ContentManager const &contentMana
 
 bool Animal::initialize() {
     surface = contentManager.getAnimal();
-//    surface = loadImage("/home/ostrea/Programs/Labs_second_term/"
-//            "Gushin/Coursework_third_try/images/asteroid_blue.png");
     return surface != nullptr;
 }
 
@@ -37,8 +35,8 @@ bool Animal::isAlive() const {
     return alive;
 }
 
-bool Animal::isCollided(std::shared_ptr<Bullet> bullet) {
-    SDL_Rect bulletRectangle = bullet->getCollisionRectangle();
+bool Animal::hasCollided(std::shared_ptr<CollideableElement> anotherElement) {
+    SDL_Rect bulletRectangle = anotherElement->getCollisionRectangle();
 
     int leftA = collisionRectangle.x;
     int rightA = collisionRectangle.x + collisionRectangle.w;

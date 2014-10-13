@@ -166,7 +166,7 @@ void Game::removeDeadElements() {
 bool Game::haveAnimalCollidedWithBullet(std::shared_ptr<Bullet> bullet) {
     for (auto animal : animals) {
         if (animal->isAlive()) {
-            if (animal->isCollided(bullet)) {
+            if (animal->hasCollided(bullet)) {
                 animal->makeDead();
                 return true;
             }
@@ -178,9 +178,11 @@ bool Game::haveAnimalCollidedWithBullet(std::shared_ptr<Bullet> bullet) {
 int Game::numberOfCollisionsAnimalsBullets() {
     int count {0};
     for (auto bullet : bullets) {
-        if (haveAnimalCollidedWithBullet(bullet)) {
-            bullet->makeDead();
-            count++;
+        if (bullet->isAlive()) {
+            if (haveAnimalCollidedWithBullet(bullet)) {
+                bullet->makeDead();
+                count++;
+            }
         }
     }
     return count;

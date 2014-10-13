@@ -46,7 +46,6 @@ private:
     int numberOfCollisionsAnimalsBullets();
 
     // основные объекты
-    std::shared_ptr<Background> background;
     std::shared_ptr<Player> player;
 
     std::list<std::shared_ptr<Animal>> animals;

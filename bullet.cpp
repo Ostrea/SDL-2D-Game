@@ -1,5 +1,4 @@
 #include "bullet.h"
-#include "functions.h"
 
 void Bullet::update() {
     y += velocityY;
@@ -33,4 +32,8 @@ void Bullet::draw() const {
     auto screen = SDL_GetVideoSurface();
     SDL_FillRect(screen, &tempRect, SDL_MapRGB(screen->format, 255, 255, 255));
     DrawableElement::draw();
+}
+
+bool Bullet::hasCollided(std::shared_ptr<CollideableElement> anotherElement) {
+    return false;
 }

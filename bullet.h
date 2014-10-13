@@ -5,10 +5,11 @@
 #include "controllableelement.h"
 #include "movableelement.h"
 #include "contentmanager.h"
+#include "collideableelement.h"
 
 class Animal;
 
-class Bullet : public DrawableElement, public MovableElement {
+class Bullet : public DrawableElement, public MovableElement, public CollideableElement {
 
 public:
     Bullet(int x, int y, double velocityY, ContentManager const &contentManager);
@@ -25,7 +26,9 @@ public:
         alive = false;
     }
 
-    SDL_Rect getCollisionRectangle() const {
+    virtual bool hasCollided(std::shared_ptr<CollideableElement> anotherElement) override;
+
+    virtual SDL_Rect getCollisionRectangle() const override {
         return collisionRectangle;
     }
 
