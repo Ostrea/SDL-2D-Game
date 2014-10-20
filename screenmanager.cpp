@@ -58,5 +58,4 @@ void ScreenManager::addScreen(std::shared_ptr<GameScreen> screen) {
 void ScreenManager::removeScreen(std::shared_ptr<GameScreen> screen) {
     screen->unloadContent();
     screens.remove(screen);
-    screensToUpdate.remove(screen);
 }

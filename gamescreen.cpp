@@ -16,3 +16,7 @@ void GameScreen::update(bool otherScreenHasFocus, bool coveredByOtherScreen) {
         state = ScreenState::ACTIVE;
     }
 }
+
+bool GameScreen::operator==(const GameScreen &b) {
+    return this == &b;
+}

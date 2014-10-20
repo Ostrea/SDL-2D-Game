@@ -36,6 +36,8 @@ public:
         return popup;
     }
 
+    bool operator==(const GameScreen& b);
+
 protected:
     bool otherScreenHasFocus;
     bool exited;
