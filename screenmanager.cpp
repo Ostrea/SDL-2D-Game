@@ -1,5 +1,3 @@
-#include <ncurses.h>
-#include <curses.h>
 #include "screenmanager.h"
 #include "gamescreen.h"
 #include "constants.h"
@@ -35,6 +33,10 @@ void ScreenManager::update(const SDL_Event &event) {
 
         if (!screen->isPopup()) {
             coveredByOtherScreen = true;
+        }
+
+        if (screen->isExited()) {
+            removeScreen(screen);
         }
     }
 }

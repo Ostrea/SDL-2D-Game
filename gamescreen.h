@@ -38,6 +38,10 @@ public:
 
     bool operator==(const GameScreen& b);
 
+    bool isExited() const {
+        return exited;
+    }
+
 protected:
     bool otherScreenHasFocus;
     bool exited;
