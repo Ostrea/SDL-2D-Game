@@ -17,5 +17,10 @@ void MainMenuScreen::handleInput(const SDL_Event &event) {
 }
 
 void MainMenuScreen::draw() {
-    applySurface(0, 0, surface, SDL_GetVideoSurface());
+    SDL_Rect temp;
+    temp.x = 0;
+    temp.y = 0;
+    temp.w = 400;
+    temp.h = 400;
+    applySurface(0, 0, surface, SDL_GetVideoSurface(), &temp);
 }

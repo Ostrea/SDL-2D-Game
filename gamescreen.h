@@ -36,8 +36,6 @@ public:
         return popup;
     }
 
-    bool operator==(const GameScreen& b);
-
     bool isExited() const {
         return exited;
     }
