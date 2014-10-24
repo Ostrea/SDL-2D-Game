@@ -1,6 +1,7 @@
 #include <iostream>
 #include "gametemp.h"
 #include "backgroundscreen.h"
+#include "mainmenuscreen.h"
 
 Game::Game() {
     running = true;
@@ -13,6 +14,7 @@ int Game::run() {
     }
 
     screenManager.addScreen(std::make_shared<BackgroundScreen>());
+    screenManager.addScreen(std::make_shared<MainMenuScreen>());
     SDL_Event event;
     while (running) {
 

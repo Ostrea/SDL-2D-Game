@@ -43,9 +43,9 @@ void ScreenManager::update(const SDL_Event &event) {
 
 void ScreenManager::draw() {
     for (auto screen : screens) {
-        if (screen->getState() == ScreenState::HIDDEN) {
-            continue;
-        }
+//        if (screen->getState() == ScreenState::HIDDEN) {
+//            continue;
+//        }
         screen->draw();
     }
     SDL_Flip(SDL_GetVideoSurface());
