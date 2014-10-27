@@ -8,10 +8,13 @@
 #include <memory>
 #include <list>
 #include "contentmanager.h"
+#include "timer.h"
 
 class GameplayScreen : public GameScreen {
 
 public:
+    GameplayScreen();
+
     virtual void loadContent() override;
 
     virtual void unloadContent() override;
@@ -31,6 +34,8 @@ private:
 
     int numberOfCollisionsAnimalsBullets();
 
+    void createBullet();
+
     // основные объекты
     SDL_Surface *canvas;
 
@@ -45,6 +50,7 @@ private:
     int currentNumberOfAnimals;
 
     ContentManager contentManager;
+    Timer animalTimer;
 };
 
 #endif // PLAYSCREEN_H

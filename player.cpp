@@ -38,18 +38,14 @@ bool Player::initialize() {
     return surface != nullptr;
 }
 
-Player::Player(int x, int y, ContentManager const &contentManager) : DrawableElement{x, y},
-            contentManager(contentManager) {
+Player::Player(int x, int y, ContentManager const &contentManager, std::function<void(void)> createBullet) :
+        DrawableElement{x, y},
+        contentManager(contentManager), createBullet(createBullet) {
     velocityX = 0;
     velocityY = 0;
 }
 
 void Player::shoot() {
-    SDL_Event tempEvent;
-    tempEvent.type = SDL_USEREVENT;
-    tempEvent.user.code = 0;
-    tempEvent.user.data1 = nullptr;
-    tempEvent.user.data2 = nullptr;
-    SDL_PushEvent(&tempEvent);
+    createBullet();
 }
 

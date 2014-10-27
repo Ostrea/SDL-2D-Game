@@ -10,7 +10,7 @@
 class Player : public ControllableElement, public DrawableElement, public MovableElement {
 
 public:
-    Player(int x, int y, ContentManager const &contentManager);
+    Player(int x, int y, ContentManager const &contentManager, std::function<void(void)> createBullet);
 
     virtual void handleInput(SDL_Event const &event) override;
 
@@ -31,6 +31,7 @@ public:
 private:
     const double ACCELERATION = 3;
     ContentManager const &contentManager;
+    std::function<void(void)> createBullet;
 };
 
 #endif // PLAYER_H
