@@ -1,6 +1,5 @@
 #include "backgroundscreen.h"
 #include "functions.h"
-#include "mainmenuscreen.h"
 
 void BackgroundScreen::loadContent(){
     surface = loadImage("/home/ostrea/Programs/Labs_second_term/"
@@ -12,9 +11,7 @@ void BackgroundScreen::unloadContent() {
 }
 
 void BackgroundScreen::handleInput(const SDL_Event &event) {
-    if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_SPACE) {
-        screenManager->addScreen(std::make_shared<MainMenuScreen>());
-    }
+
 }
 
 void BackgroundScreen::draw() {

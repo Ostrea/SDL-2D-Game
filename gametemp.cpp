@@ -2,6 +2,7 @@
 #include "gametemp.h"
 #include "backgroundscreen.h"
 #include "mainmenuscreen.h"
+#include "timer.h"
 
 Game::Game() {
     running = true;
@@ -13,17 +14,24 @@ int Game::run() {
         return -1;
     }
 
+    Timer fpsTimer;
     screenManager.addScreen(std::make_shared<BackgroundScreen>());
     screenManager.addScreen(std::make_shared<MainMenuScreen>());
     SDL_Event event;
     while (running) {
+        fpsTimer.start();
 
         while (SDL_PollEvent(&event)) {
             screenManager.update(event);
             handleEvents(event);
         }
 
-       screenManager.draw();
+        screenManager.draw();
+
+        Uint32 ticks = fpsTimer.getTicks();
+        if (ticks < 1000 / 60 ) {
+            SDL_Delay((1000 / 60) - ticks);
+        }
     }
 
     cleanUp();

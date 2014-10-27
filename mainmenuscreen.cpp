@@ -1,5 +1,6 @@
 #include "mainmenuscreen.h"
 #include "functions.h"
+#include "gameplayscreen.h"
 
 void MainMenuScreen::loadContent(){
     surface = loadImage("/home/ostrea/Programs/Labs_second_term/"
@@ -12,7 +13,7 @@ void MainMenuScreen::unloadContent() {
 
 void MainMenuScreen::handleInput(const SDL_Event &event) {
     if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_SPACE) {
-        exited = true;
+        screenManager->addScreen(std::make_shared<GameplayScreen>());
     }
 }
 
@@ -20,7 +21,7 @@ void MainMenuScreen::draw() {
     SDL_Rect temp;
     temp.x = 0;
     temp.y = 0;
-    temp.w = 400;
-    temp.h = 400;
-    applySurface(0, 0, surface, SDL_GetVideoSurface(), &temp);
+    temp.w = 200;
+    temp.h = 250;
+    applySurface(300, 150, surface, SDL_GetVideoSurface(), &temp);
 }

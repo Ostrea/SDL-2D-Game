@@ -9,7 +9,7 @@
 #include <list>
 #include "contentmanager.h"
 
-class PlayScreen : public GameScreen {
+class GameplayScreen : public GameScreen {
 
 public:
     virtual void loadContent() override;
@@ -32,6 +32,8 @@ private:
     int numberOfCollisionsAnimalsBullets();
 
     // основные объекты
+    SDL_Surface *canvas;
+
     std::shared_ptr<Player> player;
 
     std::list<std::shared_ptr<Animal>> animals;
