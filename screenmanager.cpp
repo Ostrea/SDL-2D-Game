@@ -12,7 +12,7 @@ void ScreenManager::unloadContent() {
     }
 }
 
-void ScreenManager::update(const SDL_Event &event) {
+void ScreenManager::update() {
     screensToUpdate.clear();
     screensToUpdate = screens;
     bool otherScreenHasFocus = false;
@@ -25,8 +25,8 @@ void ScreenManager::update(const SDL_Event &event) {
         screen->update(otherScreenHasFocus, coveredByOtherScreen);
 
         if (screen->getState() == ScreenState::ACTIVE) {
-            if (!otherScreenHasFocus) {
-                screen->handleInput(event);
+          if (!otherScreenHasFocus) {
+//                screen->handleInput(event);
                 otherScreenHasFocus = true;
             }
         }
@@ -60,4 +60,9 @@ void ScreenManager::addScreen(std::shared_ptr<GameScreen> screen) {
 void ScreenManager::removeScreen(std::shared_ptr<GameScreen> screen) {
     screen->unloadContent();
     screens.remove(screen);
+}
+
+void ScreenManager::handleEvents(const SDL_Event &event) {
+    auto screen = screens.back();
+    screen->handleInput(event);
 }

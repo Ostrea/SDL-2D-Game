@@ -22,9 +22,10 @@ int Game::run() {
         fpsTimer.start();
 
         while (SDL_PollEvent(&event)) {
-            screenManager.update(event);
             handleEvents(event);
         }
+
+        screenManager.update();
 
         screenManager.draw();
 
@@ -57,6 +58,7 @@ bool Game::initialize() {
 }
 
 void Game::handleEvents(SDL_Event const &event) {
+    screenManager.handleEvents(event);
     if (event.type == SDL_QUIT) {
         running = false;
     }

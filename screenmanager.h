@@ -14,7 +14,9 @@ public:
 
     void unloadContent();
 
-    void update(const SDL_Event &event);
+    void handleEvents(const SDL_Event &event);
+
+    void update();
 
     void draw();
 
