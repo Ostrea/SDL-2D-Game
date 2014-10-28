@@ -33,8 +33,6 @@ void Player::update() {
 
 bool Player::initialize() {
     surface = contentManager.getPlayer();
-//    surface = loadImage("/home/ostrea/Programs/Labs_second_term/"
-//            "Gushin/Coursework_third_try/images/ship_without_thrusters.png");
     return surface != nullptr;
 }
 
