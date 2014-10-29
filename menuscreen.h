@@ -14,7 +14,7 @@ public:
 
 private:
     std::vector<MenuEntry> menuEntries;
-    unsigned long selectedEntry = 0ul;
+    int selectedEntry = 0;
 };
 
 #endif // MENUSCREEN_H
