@@ -34,8 +34,6 @@ private:
 
     int numberOfCollisionsAnimalsBullets();
 
-    void createBullet();
-
     // основные объекты
     SDL_Surface *canvas;
 

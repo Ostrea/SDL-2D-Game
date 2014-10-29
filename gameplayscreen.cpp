@@ -131,18 +131,14 @@ GameplayScreen::GameplayScreen() {
 
     player = std::make_shared<Player>(canvas ->w / 2 -40,
             canvas->h - 100, contentManager, [this]() {
-                createBullet();
+                std::shared_ptr<Bullet> bullet = std::make_shared<Bullet>(player->getX() + 42,
+                        player->getY(), -3, contentManager);
+                bullet->initialize();
+                allElements.push_back(bullet);
+                bullets.push_back(bullet);
             });
     allElements.push_back(player);
 
     currentNumberOfAnimals = 0;
     animalTimer.start();
-}
-
-void GameplayScreen::createBullet() {
-    std::shared_ptr<Bullet> bullet = std::make_shared<Bullet>(player->getX() + 42,
-            player->getY(), -3, contentManager);
-    bullet->initialize();
-    allElements.push_back(bullet);
-    bullets.push_back(bullet);
 }
