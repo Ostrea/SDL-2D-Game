@@ -129,9 +129,10 @@ GameplayScreen::GameplayScreen() {
 
     allElements.push_back(std::make_shared<Background>(0, 0, contentManager));
 
-    std::function<void(void)> temp = std::bind(&GameplayScreen::createBullet, this);
     player = std::make_shared<Player>(canvas ->w / 2 -40,
-            canvas->h - 100, contentManager, temp);
+            canvas->h - 100, contentManager, [this]() {
+                createBullet();
+            });
     allElements.push_back(player);
 
     currentNumberOfAnimals = 0;
