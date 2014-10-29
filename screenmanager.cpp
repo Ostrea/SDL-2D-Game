@@ -3,13 +3,17 @@
 #include "constants.h"
 
 void ScreenManager::loadContent(){
-
+    menuFont = TTF_OpenFont("/usr/share/fonts/TTF/DejaVuSans-Bold.ttf", 10);
+    gameFont = TTF_OpenFont("/usr/share/fonts/TTF/DejaVuSans-Bold.ttf", 10);
 }
 
 void ScreenManager::unloadContent() {
     for (auto screen : screens) {
         screen->unloadContent();
     }
+
+    TTF_CloseFont(menuFont);
+    TTF_CloseFont(gameFont);
 }
 
 void ScreenManager::update() {

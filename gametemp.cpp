@@ -1,4 +1,5 @@
 #include <iostream>
+#include <SDL/SDL_ttf.h>
 #include "gametemp.h"
 #include "backgroundscreen.h"
 #include "mainmenuscreen.h"
@@ -45,6 +46,11 @@ bool Game::initialize() {
         return false;
     }
 
+    if (TTF_Init() == -1) {
+        std::cerr << "Не удалось запустить SDL TTF.\n";
+        return false;
+    }
+
     canvas = SDL_SetVideoMode(SCREEN_WIDTH, SCREEN_HEIGHT, 32, SDL_HWSURFACE | SDL_DOUBLEBUF);
     if (canvas == nullptr) {
         std::cerr << "Не удалось создать окно.\n";
@@ -77,5 +83,6 @@ void Game::draw() {
 
 void Game::cleanUp() {
     screenManager.unloadContent();
+    TTF_Quit();
     SDL_Quit();
 }
