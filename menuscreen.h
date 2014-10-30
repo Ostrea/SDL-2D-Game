@@ -12,7 +12,7 @@ public:
 
     virtual void draw() override;
 
-private:
+protected:
     std::vector<MenuEntry> menuEntries;
     int selectedEntry = 0;
 };

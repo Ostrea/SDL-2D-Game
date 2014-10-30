@@ -11,11 +11,11 @@ void MainMenuScreen::unloadContent() {
     SDL_FreeSurface(surface);
 }
 
-void MainMenuScreen::handleInput(const SDL_Event &event) {
-    if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_SPACE) {
-        screenManager->addScreen(std::make_shared<GameplayScreen>());
-    }
-}
+//void MainMenuScreen::handleInput(const SDL_Event &event) {
+//    if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_SPACE) {
+//        screenManager->addScreen(std::make_shared<GameplayScreen>());
+//    }
+//}
 
 void MainMenuScreen::draw() {
     SDL_Rect temp;
@@ -24,4 +24,11 @@ void MainMenuScreen::draw() {
     temp.w = 200;
     temp.h = 250;
     applySurface(300, 150, surface, SDL_GetVideoSurface(), &temp);
+    MenuScreen::draw();
+}
+
+MainMenuScreen::MainMenuScreen() {
+    menuEntries.push_back(MenuEntry("Играть", screenManager, 200, 200, [this] {
+        screenManager->addScreen(std::make_shared<GameplayScreen>());
+    }));
 }

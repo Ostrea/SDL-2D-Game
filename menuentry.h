@@ -9,15 +9,15 @@ class ScreenManager;
 class MenuEntry {
 
 public:
-    MenuEntry(std::string text, ScreenManager &screenManager,
-            std::function<void(void)> actionOnSelection, int x, int y);
+    MenuEntry(std::string text, ScreenManager *screenManager, int x, int y,
+            std::function<void(void)> actionOnSelection);
 
     void onSelect();
 
     void draw();
 
 private:
-    ScreenManager &screenManager;
+    ScreenManager *screenManager;
     std::string text;
     int x;
     int y;
