@@ -9,6 +9,7 @@
 #include <list>
 #include "contentmanager.h"
 #include "timer.h"
+#include "SDL/SDL.h"
 
 class GameplayScreen : public GameScreen {
 
@@ -47,8 +48,16 @@ private:
 
     int currentNumberOfAnimals;
 
+    int score;
+    SDL_Color textColor;
+    SDL_Surface *scoreMessage;
+
     ContentManager contentManager;
+
     Timer animalTimer;
+
+    Timer gameTimer;
+    SDL_Surface *timeMessage;
 };
 
 #endif // PLAYSCREEN_H

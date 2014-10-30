@@ -13,5 +13,4 @@ void MenuEntry::onSelect() {
 }
 
 void MenuEntry::draw() {
-
 }

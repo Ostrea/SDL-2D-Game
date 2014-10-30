@@ -5,6 +5,7 @@
 #include <chrono>
 #include <stdexcept>
 #include "animal.h"
+#include "functions.h"
 
 void GameplayScreen::loadContent() {
     contentManager.loadContent();
@@ -32,7 +33,17 @@ void GameplayScreen::update(bool otherScreenHasFocus, bool coveredByOtherScreen)
             animalTimer.start();
         }
 
-        numberOfCollisionsAnimalsBullets();
+        if (gameTimer.getTicks() >= 20000) {
+            exited = true;
+        }
+
+        std::string message = "Очки: " + std::to_string(score);
+        scoreMessage = TTF_RenderUTF8_Solid(screenManager->getGameFont(), message.c_str(), textColor);
+
+        message = "Время: " + std::to_string(gameTimer.getTicks() / 1000);
+        timeMessage = TTF_RenderUTF8_Solid(screenManager->getGameFont(), message.c_str(), textColor);
+
+        score += numberOfCollisionsAnimalsBullets();
 
         for (auto element : allElements) {
             element->update();
@@ -46,6 +57,8 @@ void GameplayScreen::draw() {
     for (auto element : allElements) {
         element->draw();
     }
+    applySurface(25, 25, scoreMessage, canvas);
+    applySurface(canvas->w - 75, 25, timeMessage, canvas);
     SDL_Flip(canvas);
 }
 
@@ -130,7 +143,7 @@ GameplayScreen::GameplayScreen() {
     allElements.push_back(std::make_shared<Background>(0, 0, contentManager));
 
     player = std::make_shared<Player>(canvas ->w / 2 -40,
-            canvas->h - 100, contentManager, [this]() {
+            canvas->h - 100, contentManager, [this] {
                 std::shared_ptr<Bullet> bullet = std::make_shared<Bullet>(player->getX() + 42,
                         player->getY(), -3, contentManager);
                 bullet->initialize();
@@ -141,4 +154,9 @@ GameplayScreen::GameplayScreen() {
 
     currentNumberOfAnimals = 0;
     animalTimer.start();
+
+    score = 0;
+    textColor = {255, 255, 255};
+
+    gameTimer.start();
 }
