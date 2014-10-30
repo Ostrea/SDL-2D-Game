@@ -23,5 +23,7 @@ void MenuScreen::handleInput(const SDL_Event& event){
 }
 
 void MenuScreen::draw() {
-
+    for (auto item : menuEntries) {
+        item.draw();
+    }
 }
