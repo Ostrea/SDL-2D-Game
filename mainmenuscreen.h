@@ -10,8 +10,6 @@ public:
 
     virtual void unloadContent() override;
 
-    virtual void draw() override;
-
 private:
     SDL_Surface *surface;
 };

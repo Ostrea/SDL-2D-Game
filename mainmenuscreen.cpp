@@ -17,13 +17,3 @@ void MainMenuScreen::loadContent(){
 void MainMenuScreen::unloadContent() {
     SDL_FreeSurface(surface);
 }
-
-void MainMenuScreen::draw() {
-    SDL_Rect temp;
-    temp.x = 0;
-    temp.y = 0;
-    temp.w = 200;
-    temp.h = 250;
-    applySurface(300, 150, surface, SDL_GetVideoSurface(), &temp);
-    MenuScreen::draw();
-}

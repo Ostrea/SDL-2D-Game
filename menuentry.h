@@ -23,8 +23,8 @@ private:
     int y;
     std::function<void(void)> actionOnSelection;
     SDL_Surface *surface;
-    SDL_Color white = {255, 255, 255};
-    SDL_Color red = {255, 0, 0};
+    SDL_Color deactivated = {255, 255, 255};
+    SDL_Color activated = {0, 0, 255};
 };
 
 #endif // MENUENTRY_H

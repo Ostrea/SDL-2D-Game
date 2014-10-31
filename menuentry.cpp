@@ -14,7 +14,7 @@ void MenuEntry::onSelect() {
 }
 
 void MenuEntry::draw(bool selected) {
-    SDL_Color textColor = selected ? red : white;
-    surface = TTF_RenderUTF8_Solid(screenManager->getGameFont(), text.c_str(), textColor);
+    SDL_Color textColor = selected ? activated : deactivated;
+    surface = TTF_RenderUTF8_Solid(screenManager->getMenuFont(), text.c_str(), textColor);
     applySurface(x, y, surface, SDL_GetVideoSurface());
 }
