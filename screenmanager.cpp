@@ -17,7 +17,6 @@ void ScreenManager::unloadContent() {
 }
 
 void ScreenManager::update() {
-//    screensToUpdate.clear();
     auto screensToUpdate = screens;
     bool otherScreenHasFocus = false;
     bool coveredByOtherScreen = false;
