@@ -39,7 +39,7 @@ public:
 
 private:
     std::list<std::shared_ptr<GameScreen>> screens;
-    std::list<std::shared_ptr<GameScreen>> screensToUpdate;
+//    std::list<std::shared_ptr<GameScreen>> screensToUpdate;
     TTF_Font *menuFont;
     TTF_Font *gameFont;
 };
