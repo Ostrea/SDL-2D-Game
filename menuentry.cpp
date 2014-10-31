@@ -6,14 +6,15 @@ MenuEntry::MenuEntry(std::string text, ScreenManager *screenManager, int x, int 
         : screenManager(screenManager),
           actionOnSelection(actionOnSelection),
           text(text), x(x), y(y)  {
-    TTF_Font *font = TTF_OpenFont("/usr/share/fonts/TTF/DejaVuSans-Bold.ttf", 10);
-    surface = TTF_RenderUTF8_Solid(font, text.c_str(), textColor);
+
 }
 
 void MenuEntry::onSelect() {
     actionOnSelection();
 }
 
-void MenuEntry::draw() {
+void MenuEntry::draw(bool selected) {
+    SDL_Color textColor = selected ? red : white;
+    surface = TTF_RenderUTF8_Solid(screenManager->getGameFont(), text.c_str(), textColor);
     applySurface(x, y, surface, SDL_GetVideoSurface());
 }

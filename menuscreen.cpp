@@ -23,7 +23,8 @@ void MenuScreen::handleInput(const SDL_Event& event){
 }
 
 void MenuScreen::draw() {
-    for (auto item : menuEntries) {
-        item.draw();
+    for (int i = 0; i < menuEntries.size(); ++i) {
+        bool selected = i == selectedEntry;
+        menuEntries.at(i).draw(selected);
     }
 }

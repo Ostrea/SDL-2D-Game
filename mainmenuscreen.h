@@ -6,13 +6,9 @@
 class MainMenuScreen : public MenuScreen {
 
 public:
-    MainMenuScreen();
-
     virtual void loadContent() override;
 
     virtual void unloadContent() override;
-
-//    virtual void handleInput(const SDL_Event &event) override;
 
     virtual void draw() override;
 

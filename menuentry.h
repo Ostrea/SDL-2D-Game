@@ -14,7 +14,7 @@ public:
 
     void onSelect();
 
-    void draw();
+    void draw(bool selected);
 
 private:
     ScreenManager *screenManager;
@@ -23,7 +23,8 @@ private:
     int y;
     std::function<void(void)> actionOnSelection;
     SDL_Surface *surface;
-    SDL_Color textColor = {255, 255, 255};
+    SDL_Color white = {255, 255, 255};
+    SDL_Color red = {255, 0, 0};
 };
 
 #endif // MENUENTRY_H
