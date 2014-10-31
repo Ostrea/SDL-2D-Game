@@ -33,6 +33,10 @@ public:
         return gameFont;
     }
 
+    bool exitGame() const {
+        return screens.size() == 1;
+    }
+
 private:
     std::list<std::shared_ptr<GameScreen>> screens;
     std::list<std::shared_ptr<GameScreen>> screensToUpdate;

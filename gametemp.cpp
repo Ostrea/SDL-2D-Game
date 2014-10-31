@@ -30,6 +30,10 @@ int Game::run() {
 
         screenManager.draw();
 
+        if (screenManager.exitGame()) {
+            running = false;
+        }
+
         Uint32 ticks = fpsTimer.getTicks();
         if (ticks < 1000 / 60 ) {
             SDL_Delay((1000 / 60) - ticks);
