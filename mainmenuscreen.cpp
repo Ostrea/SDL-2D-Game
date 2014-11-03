@@ -3,9 +3,6 @@
 #include "gameplayscreen.h"
 
 void MainMenuScreen::loadContent(){
-    surface = loadImage("/home/ostrea/Programs/Labs_second_term/"
-            "Gushin/Coursework_second_try/images/nebula_brown.png");
-
     menuEntries.push_back(MenuEntry("Играть", screenManager, 400, 200, [this] {
         screenManager->addScreen(std::make_shared<GameplayScreen>());
     }));
@@ -15,5 +12,5 @@ void MainMenuScreen::loadContent(){
 }
 
 void MainMenuScreen::unloadContent() {
-    SDL_FreeSurface(surface);
+
 }

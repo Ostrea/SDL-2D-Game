@@ -4,7 +4,7 @@ project(coursework_third_try)
 set(SOURCE_FILES main.cpp functions.cpp drawableelement.cpp background.cpp
 controllableelement.h player.cpp bullet.cpp animal.cpp timer.cpp movableelement.h contentmanager.cpp
 collideableelement.h screenmanager.cpp gamescreen.cpp gametemp.cpp constants.h backgroundscreen.cpp
-mainmenuscreen.cpp gameplayscreen.cpp menuscreen.cpp menuentry.cpp)
+mainmenuscreen.cpp gameplayscreen.cpp menuscreen.cpp menuentry.cpp pausemenuscreen.cpp)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 

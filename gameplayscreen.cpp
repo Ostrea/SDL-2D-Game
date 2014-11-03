@@ -3,9 +3,9 @@
 #include "background.h"
 #include <random>
 #include <chrono>
-#include <stdexcept>
 #include "animal.h"
 #include "functions.h"
+#include "pausemenuscreen.h"
 
 void GameplayScreen::loadContent() {
     contentManager.loadContent();
@@ -23,6 +23,12 @@ void GameplayScreen::unloadContent() {
 
 void GameplayScreen::handleInput(const SDL_Event &event) {
     player->handleInput(event);
+    if (event.type  == SDL_KEYDOWN) {
+        if (event.key.keysym.sym == SDLK_p) {
+            gameTimer.pause();
+            screenManager->addScreen(std::make_shared<PauseMenuScreen>(gameTimer));
+        }
+    }
 }
 
 void GameplayScreen::update(bool otherScreenHasFocus, bool coveredByOtherScreen) {

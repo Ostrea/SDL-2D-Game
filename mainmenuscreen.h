@@ -9,9 +9,6 @@ public:
     virtual void loadContent() override;
 
     virtual void unloadContent() override;
-
-private:
-    SDL_Surface *surface;
 };
 
 #endif // MAINMENUSCREEN_H

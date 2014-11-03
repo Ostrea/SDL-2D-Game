@@ -34,14 +34,18 @@ public:
     }
 
     bool exitGame() const {
-        return screens.size() == 1;
+        return screens.size() == 1 || needToExit;
+    }
+
+    void setNeedToExit(bool needToExit) {
+        this->needToExit = needToExit;
     }
 
 private:
     std::list<std::shared_ptr<GameScreen>> screens;
-//    std::list<std::shared_ptr<GameScreen>> screensToUpdate;
     TTF_Font *menuFont;
     TTF_Font *gameFont;
+    bool needToExit = false;
 };
 
 #endif // SCREENMANAGER_H
