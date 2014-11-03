@@ -40,7 +40,7 @@ void GameplayScreen::update(bool otherScreenHasFocus, bool coveredByOtherScreen)
             animalTimer.start();
         }
 
-        if (gameTimer.getTicks() >= 21000) {
+        if (gameTimer.getTicks() >= 20000) {
             screenManager->addScreen(std::make_shared<HighScoresScreen>());
             exited = true;
         }
@@ -48,7 +48,7 @@ void GameplayScreen::update(bool otherScreenHasFocus, bool coveredByOtherScreen)
         std::string message = "Очки: " + std::to_string(score);
         scoreMessage = TTF_RenderUTF8_Solid(screenManager->getGameFont(), message.c_str(), textColor);
 
-        message = "Время: " + std::to_string(gameTimer.getTicks() / 1000);
+        message = "Время: " + std::to_string(gameTimer.getTicks() / 1000 + 1);
         timeMessage = TTF_RenderUTF8_Solid(screenManager->getGameFont(), message.c_str(), textColor);
 
         score += numberOfCollisionsAnimalsBullets();
@@ -67,7 +67,6 @@ void GameplayScreen::draw() {
     }
     applySurface(25, 25, scoreMessage, canvas);
     applySurface(canvas->w - 75, 25, timeMessage, canvas);
-    SDL_Flip(canvas);
 }
 
 void GameplayScreen::createAnimal() {
