@@ -9,7 +9,7 @@ class ScreenManager;
 class MenuEntry {
 
 public:
-    MenuEntry(std::string text, ScreenManager *screenManager, int x, int y,
+    MenuEntry(std::string text, TTF_Font *font, int x, int y,
             std::function<void(void)> actionOnSelection);
 
     void onSelect();
@@ -17,7 +17,7 @@ public:
     void draw(bool selected);
 
 private:
-    ScreenManager *screenManager;
+    TTF_Font *font;
     std::string text;
     int x;
     int y;
