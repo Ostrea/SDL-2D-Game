@@ -6,6 +6,7 @@
 #include "animal.h"
 #include "functions.h"
 #include "pausemenuscreen.h"
+#include "highscoresscreen.h"
 
 void GameplayScreen::loadContent() {
     contentManager.loadContent();
@@ -40,6 +41,7 @@ void GameplayScreen::update(bool otherScreenHasFocus, bool coveredByOtherScreen)
         }
 
         if (gameTimer.getTicks() >= 21000) {
+            screenManager->addScreen(std::make_shared<HighScoresScreen>());
             exited = true;
         }
 
