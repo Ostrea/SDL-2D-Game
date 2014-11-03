@@ -14,7 +14,9 @@ void HighScoresScreen::loadContent(){
 }
 
 void HighScoresScreen::unloadContent() {
-
+    for (auto surface : highScoresSurfaces) {
+        SDL_FreeSurface(surface);
+    }
 }
 
 void HighScoresScreen::handleInput(const SDL_Event &event) {
