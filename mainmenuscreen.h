@@ -6,6 +6,10 @@
 class MainMenuScreen : public MenuScreen {
 
 public:
+    MainMenuScreen() {
+        popup = true;
+    }
+
     virtual void loadContent() override;
 
     virtual void unloadContent() override;

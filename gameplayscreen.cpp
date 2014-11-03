@@ -39,7 +39,7 @@ void GameplayScreen::update(bool otherScreenHasFocus, bool coveredByOtherScreen)
             animalTimer.start();
         }
 
-        if (gameTimer.getTicks() >= 20000) {
+        if (gameTimer.getTicks() >= 21000) {
             exited = true;
         }
 

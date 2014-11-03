@@ -25,7 +25,6 @@ int Game::run() {
         while (SDL_PollEvent(&event)) {
             handleEvents(event);
         }
-
         screenManager.update();
 
         screenManager.draw();
