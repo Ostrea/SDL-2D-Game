@@ -33,6 +33,10 @@ public:
         return gameFont;
     }
 
+    TTF_Font *getTextFont() const {
+        return textFont;
+    }
+
     bool exitGame() const {
         return screens.size() == 1 || needToExit;
     }
@@ -51,8 +55,11 @@ public:
 
 private:
     std::list<std::shared_ptr<GameScreen>> screens;
+
     TTF_Font *menuFont;
     TTF_Font *gameFont;
+    TTF_Font *textFont;
+
     bool needToExit = false;
     std::string name;
 };

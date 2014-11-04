@@ -5,6 +5,7 @@
 void ScreenManager::loadContent(){
     menuFont = TTF_OpenFont("/home/ostrea/Programs/SOTH 2/SOTH/a_MachinaOrtoShtRegular.ttf", 30);
     gameFont = TTF_OpenFont("/usr/share/fonts/TTF/DejaVuSans-Bold.ttf", 10);
+    textFont = TTF_OpenFont("/usr/share/fonts/TTF/DJB Zora Prints.ttf", 25);
 }
 
 void ScreenManager::unloadContent() {
@@ -14,6 +15,7 @@ void ScreenManager::unloadContent() {
 
     TTF_CloseFont(menuFont);
     TTF_CloseFont(gameFont);
+    TTF_CloseFont(textFont);
 }
 
 void ScreenManager::update() {

@@ -13,6 +13,11 @@ public:
     virtual void loadContent() override;
 
     virtual void unloadContent() override;
+
+    virtual void draw() override;
+
+private:
+    SDL_Surface *nameSurface;
 };
 
 #endif // MAINMENUSCREEN_H

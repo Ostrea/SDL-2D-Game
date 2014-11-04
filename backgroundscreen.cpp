@@ -3,7 +3,7 @@
 
 void BackgroundScreen::loadContent(){
     surface = loadImage("/home/ostrea/Programs/Labs_second_term/"
-            "Gushin/Coursework_second_try/images/nebula_blue.png");
+            "Gushin/Coursework_third_try/images/main_background.jpg");
 }
 
 void BackgroundScreen::unloadContent() {
