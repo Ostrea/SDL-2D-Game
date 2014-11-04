@@ -19,6 +19,7 @@ public:
 private:
     std::string text;
     SDL_Surface *textSurface;
+    SDL_Surface *promptSurface;
     SDL_Color textColor = {255, 255, 255};
 };
 
