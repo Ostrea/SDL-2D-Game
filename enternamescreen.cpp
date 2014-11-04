@@ -33,7 +33,7 @@ void EnterNameScreen::handleInput(const SDL_Event &event) {
         if (text != temp) {
             SDL_FreeSurface(textSurface);
 
-            textSurface = TTF_RenderUTF8_Solid(screenManager->getTextFont(), text.c_str(), textColor);
+            textSurface = TTF_RenderUTF8_Solid(screenManager->getTextFont(), text.c_str(), nameColor);
         }
     }
 

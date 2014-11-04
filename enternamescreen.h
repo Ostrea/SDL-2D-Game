@@ -21,6 +21,7 @@ private:
     SDL_Surface *textSurface;
     SDL_Surface *promptSurface;
     SDL_Color textColor = {255, 255, 255};
+    SDL_Color nameColor = {0x9A, 0xCD, 0x32};
 };
 
 #endif // ENTERNAMESCREEN_H

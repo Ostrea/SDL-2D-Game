@@ -24,7 +24,7 @@ private:
     std::function<void(void)> actionOnSelection;
     SDL_Surface *surface;
     SDL_Color deactivated = {255, 255, 255};
-    SDL_Color activated = {0xFF, 0xCC, 0x66};
+    SDL_Color activated = {0xFF, 0x99, 0x33};
 };
 
 #endif // MENUENTRY_H

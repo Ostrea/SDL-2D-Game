@@ -24,7 +24,7 @@ void MainMenuScreen::loadContent(){
     }));
 
     nameSurface = TTF_RenderUTF8_Solid(screenManager->getTextFont(),
-            screenManager->getName().c_str(), {255, 255, 255});
+            screenManager->getName().c_str(), {0x9A, 0xCD, 0x32});
 }
 
 void MainMenuScreen::unloadContent() {
