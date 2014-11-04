@@ -4,6 +4,7 @@
 #include "backgroundscreen.h"
 #include "mainmenuscreen.h"
 #include "timer.h"
+#include "enternamescreen.h"
 
 Game::Game() {
     running = true;
@@ -17,7 +18,7 @@ int Game::run() {
 
     Timer fpsTimer;
     screenManager.addScreen(std::make_shared<BackgroundScreen>());
-    screenManager.addScreen(std::make_shared<MainMenuScreen>());
+    screenManager.addScreen(std::make_shared<EnterNameScreen>());
     SDL_Event event;
     while (running) {
         fpsTimer.start();

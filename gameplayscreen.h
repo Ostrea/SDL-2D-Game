@@ -58,6 +58,8 @@ private:
 
     Timer gameTimer;
     SDL_Surface *timeMessage;
+
+    SDL_Surface *nameMessage;
 };
 
 #endif // PLAYSCREEN_H

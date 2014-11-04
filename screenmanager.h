@@ -41,11 +41,20 @@ public:
         this->needToExit = needToExit;
     }
 
+    std::string getName() const {
+        return name;
+    }
+
+    void setName(std::string name) {
+        this->name = name;
+    }
+
 private:
     std::list<std::shared_ptr<GameScreen>> screens;
     TTF_Font *menuFont;
     TTF_Font *gameFont;
     bool needToExit = false;
+    std::string name;
 };
 
 #endif // SCREENMANAGER_H

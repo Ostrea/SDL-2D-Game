@@ -16,6 +16,9 @@ void GameplayScreen::loadContent() {
             throw std::runtime_error(std::string("Не удалось инициализировать какой-то объект, ") + SDL_GetError());
         }
     }
+
+    nameMessage = TTF_RenderUTF8_Solid(screenManager->getGameFont(),
+            screenManager->getName().c_str(), textColor);
 }
 
 void GameplayScreen::unloadContent() {
@@ -67,6 +70,7 @@ void GameplayScreen::draw() {
     }
     applySurface(25, 25, scoreMessage, canvas);
     applySurface(canvas->w - 75, 25, timeMessage, canvas);
+    applySurface(canvas->w / 2, 25, nameMessage, canvas);
 }
 
 void GameplayScreen::createAnimal() {
