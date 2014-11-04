@@ -1,22 +1,19 @@
 #include "pausemenuscreen.h"
 
 void PauseMenuScreen::loadContent(){
-    menuEntries.push_back(MenuEntry("Продолжить", screenManager->getMenuFont(), 400, 200, [this] {
+    int x = SDL_GetVideoSurface()->w / 2 - 80;
+    int y = 200;
+    TTF_Font *font = screenManager->getMenuFont();
+
+    menuEntries.push_back(MenuEntry("Продолжить", font, x, y, [this] {
         gameTimer.unpause();
         exited = true;
     }));
-    menuEntries.push_back(MenuEntry("Выход", screenManager->getMenuFont(), 400, 300, [this] {
+    menuEntries.push_back(MenuEntry("Выход", font, x, y + 100, [this] {
         screenManager->setNeedToExit(true);
     }));
 }
 
 void PauseMenuScreen::unloadContent() {
 
-}
-
-void PauseMenuScreen::draw() {
-    SDL_Surface *canvas = SDL_GetVideoSurface();
-    SDL_Rect rect = {350, 150, 250, 200};
-    SDL_FillRect(canvas, &rect, SDL_MapRGB(canvas->format, 100, 255, 20));
-    MenuScreen::draw();
 }

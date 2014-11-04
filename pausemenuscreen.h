@@ -13,8 +13,6 @@ public:
 
     virtual void unloadContent() override;
 
-    virtual void draw() override;
-
 private:
     Timer &gameTimer;
 };

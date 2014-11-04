@@ -17,6 +17,6 @@ SDL_Surface *loadImage(std::string fileName) {
 
 void applySurface(int x, int y, SDL_Surface *source,
         SDL_Surface *destination, SDL_Rect *clip) {
-    SDL_Rect offset{static_cast<Sint16>(x), static_cast<Sint16>(y)};
+    SDL_Rect offset {static_cast<Sint16>(x), static_cast<Sint16>(y)};
     SDL_BlitSurface(source, clip, destination, &offset);
 }

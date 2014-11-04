@@ -7,9 +7,7 @@
 class HighScoresScreen : public GameScreen {
 
 public:
-    HighScoresScreen() {
-        popup = true;
-    }
+    HighScoresScreen();
 
     virtual void loadContent();
 
@@ -23,7 +21,8 @@ private:
     const int NUMBER_OF_SCORES = 10;
     std::vector<std::pair<std::string, int>> highScores;
     std::vector<SDL_Surface*> highScoresSurfaces;
-    SDL_Color textColor = {255, 255, 255};
+    SDL_Color textColor = {0, 0, 0};
+    SDL_Surface *background;
 };
 
 #endif // HIGHSCORESSCREEN_H
