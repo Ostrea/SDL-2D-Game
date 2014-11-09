@@ -1,10 +1,16 @@
 #include "highscoresscreen.h"
 #include "functions.h"
+#include <fstream>
+#include <iostream>
 
-void HighScoresScreen::loadContent(){
+void HighScoresScreen::loadContent() {
     for (int i = 0; i < NUMBER_OF_SCORES; ++i) {
-        highScores.push_back(std::pair<std::string, int>("Ostrea", 10));
+        highScores.push_back(std::pair<std::string, int>("-", 0));
     }
+
+    std::ofstream file("/home/ostrea/Programs/Labs_second_term/"
+            "Gushin/Coursework_third_try/coursework_third_try/highscores", std::ios::out | std::ios::binary);
+//    std::copy(highScores.begin(), highScores.end(), std::ostreambuf_iterator<char>(file));
 
     for (auto score : highScores) {
         std::string message = score.first + " : " + std::to_string(score.second);
