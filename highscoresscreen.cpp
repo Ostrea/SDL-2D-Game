@@ -4,6 +4,7 @@
 #include <iostream>
 
 void HighScoresScreen::loadContent() {
+//    TODO insert new highscores in the vector using standard method and then delete last element to keep 10 elements
 //    for (int i = 0; i < NUMBER_OF_SCORES; ++i) {
 //        highScores.push_back(std::pair<std::string, int>("Ostrea", 0));
 //    }
@@ -17,6 +18,8 @@ void HighScoresScreen::loadContent() {
 //    file.write(reinterpret_cast<char*>(&sz), sizeof(sz));
 //    file.write(reinterpret_cast<char*>(&myVector[0]), sz * sizeof(myVector[0]));
 
+//    int numberOfElements = 0;
+//    file.write(reinterpret_cast<char*>(&numberOfElements), sizeof(numberOfElements));
 //    for (auto item : highScores) {
 //        unsigned long size = item.first.size() + 1;
 //        file.write(reinterpret_cast<char*>(&size), sizeof(size));
@@ -29,7 +32,9 @@ void HighScoresScreen::loadContent() {
 
     std::ifstream file2("/home/ostrea/Programs/Labs_second_term/"
             "Gushin/Coursework_third_try/coursework_third_try/highscores", std::ios::in | std::ios::binary);
-    for (int i = 0; i < NUMBER_OF_SCORES; ++i) {
+    int numberOfElements;
+    file2.read(reinterpret_cast<char*>(&numberOfElements), sizeof(numberOfElements));
+    for (int i = 0; i < numberOfElements; ++i) {
         unsigned long size;
         file2.read(reinterpret_cast<char*>(&size), sizeof(size));
         char string[size];
