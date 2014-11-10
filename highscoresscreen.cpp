@@ -90,9 +90,6 @@ void HighScoresScreen::readHighScores() {
             int score;
             file.read(reinterpret_cast<char*>(&score), sizeof(score));
 
-//            TODO delete after testing
-            std::cout << "size = " << size << " score = " << score << " name = " << string << std::endl;
-
             highScores.push_back(std::pair<std::string, int>(string, score));
         }
     }
@@ -120,5 +117,15 @@ void HighScoresScreen::writeHighScores() {
 void HighScoresScreen::updateHighScores() {
     if (highScores.empty()) {
         highScores.push_back(std::pair<std::string, int>(screenManager->getName(), currentScores));
+    } else {
+        auto currentPosition = highScores.begin();
+        while (currentPosition->second > currentScores && currentPosition != highScores.end()) {
+            currentPosition++;
+        }
+        highScores.insert(currentPosition, std::pair<std::string, int>(screenManager->getName(), currentScores));
+
+        if (highScores.size() > NUMBER_OF_SCORES) {
+            highScores.pop_back();
+        }
     }
 }
