@@ -9,6 +9,8 @@ class HighScoresScreen : public GameScreen {
 public:
     HighScoresScreen();
 
+    HighScoresScreen(int currentScores) ;
+
     virtual void loadContent();
 
     virtual void unloadContent();
@@ -23,6 +25,14 @@ private:
     std::vector<SDL_Surface*> highScoresSurfaces;
     SDL_Color textColor = {0, 0, 0};
     SDL_Surface *background;
+    bool overwrite;
+    int currentScores;
+
+    void readHighScores();
+
+    void writeHighScores();
+
+    void updateHighScores();
 };
 
 #endif // HIGHSCORESSCREEN_H

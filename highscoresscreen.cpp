@@ -2,49 +2,23 @@
 #include "functions.h"
 #include <fstream>
 #include <iostream>
+#include <stdexcept>
 
 void HighScoresScreen::loadContent() {
+    background = loadImage("/home/ostrea/Programs/Labs_second_term/"
+            "Gushin/Coursework_third_try/images/highscores_background.jpg");
+
 //    TODO insert new highscores in the vector using standard method and then delete last element to keep 10 elements
 //    for (int i = 0; i < NUMBER_OF_SCORES; ++i) {
 //        highScores.push_back(std::pair<std::string, int>("Ostrea", 0));
 //    }
 //
-//    std::ofstream file("/home/ostrea/Programs/Labs_second_term/"
-//            "Gushin/Coursework_third_try/coursework_third_try/highscores", std::ios::out | std::ios::binary);
 
-//    std::copy(highScores.begin(), highScores.end(), std::ostreambuf_iterator<char>(file));
+    readHighScores();
 
-//    size_t sz = myVector.size();
-//    file.write(reinterpret_cast<char*>(&sz), sizeof(sz));
-//    file.write(reinterpret_cast<char*>(&myVector[0]), sz * sizeof(myVector[0]));
-
-//    int numberOfElements = 0;
-//    file.write(reinterpret_cast<char*>(&numberOfElements), sizeof(numberOfElements));
-//    for (auto item : highScores) {
-//        unsigned long size = item.first.size() + 1;
-//        file.write(reinterpret_cast<char*>(&size), sizeof(size));
-//        auto string = item.first.c_str();
-//        file.write(&string[0], sizeof(char) * size);
-//        int score = item.second;
-//        file.write(reinterpret_cast<char*>(&score), sizeof(score));
-//    }
-//    file.close();
-
-    std::ifstream file2("/home/ostrea/Programs/Labs_second_term/"
-            "Gushin/Coursework_third_try/coursework_third_try/highscores", std::ios::in | std::ios::binary);
-    int numberOfElements;
-    file2.read(reinterpret_cast<char*>(&numberOfElements), sizeof(numberOfElements));
-    for (int i = 0; i < numberOfElements; ++i) {
-        unsigned long size;
-        file2.read(reinterpret_cast<char*>(&size), sizeof(size));
-        char string[size];
-        file2.read(&string[0], sizeof(char) * size);
-        int score;
-        file2.read(reinterpret_cast<char*>(&score), sizeof(score));
-        std::cout << "size = " << size << " score = " << score << " name = " << string << std::endl;
-        highScores.push_back(std::pair<std::string, int>(string, score));
+    if (overwrite) {
+        updateHighScores();
     }
-    file2.close();
 
     for (auto score : highScores) {
         std::string message = score.first + " : " + std::to_string(score.second);
@@ -58,6 +32,10 @@ void HighScoresScreen::unloadContent() {
         SDL_FreeSurface(surface);
     }
     SDL_FreeSurface(background);
+
+    if (overwrite) {
+        writeHighScores();
+    }
 }
 
 void HighScoresScreen::handleInput(const SDL_Event &event) {
@@ -84,6 +62,63 @@ void HighScoresScreen::draw() {
 
 HighScoresScreen::HighScoresScreen() {
     popup = true;
-    background = loadImage("/home/ostrea/Programs/Labs_second_term/"
-            "Gushin/Coursework_third_try/images/highscores_background.jpg");
+    currentScores = 0;
+    overwrite = false;
+}
+
+HighScoresScreen::HighScoresScreen(int currentScores) :
+        currentScores(currentScores) {
+    popup = true;
+    overwrite = true;
+}
+
+void HighScoresScreen::readHighScores() {
+    std::ifstream file("/home/ostrea/Programs/Labs_second_term/"
+            "Gushin/Coursework_third_try/coursework_third_try/highscores", std::ios::in | std::ios::binary);
+    if (file.fail()) {
+        throw std::runtime_error("Не удалось открыть файл");
+    }
+
+    if (file.peek() != std::ifstream::traits_type::eof()) {
+        unsigned long numberOfElements;
+        file.read(reinterpret_cast<char*>(&numberOfElements), sizeof(numberOfElements));
+        for (int i = 0; i < numberOfElements; ++i) {
+            unsigned long size;
+            file.read(reinterpret_cast<char*>(&size), sizeof(size));
+            char string[size];
+            file.read(&string[0], sizeof(char) * size);
+            int score;
+            file.read(reinterpret_cast<char*>(&score), sizeof(score));
+
+//            TODO delete after testing
+            std::cout << "size = " << size << " score = " << score << " name = " << string << std::endl;
+
+            highScores.push_back(std::pair<std::string, int>(string, score));
+        }
+    }
+}
+
+void HighScoresScreen::writeHighScores() {
+    std::ofstream file("/home/ostrea/Programs/Labs_second_term/"
+        "Gushin/Coursework_third_try/coursework_third_try/highscores", std::ios::out | std::ios::binary);
+    if (file.fail()) {
+        throw std::runtime_error("Не удалось открыть файл");
+    }
+
+    unsigned long numberOfElements = highScores.size();
+    file.write(reinterpret_cast<char*>(&numberOfElements), sizeof(numberOfElements));
+    for (auto item : highScores) {
+        unsigned long size = item.first.size() + 1;
+        file.write(reinterpret_cast<char*>(&size), sizeof(size));
+        auto string = item.first.c_str();
+        file.write(&string[0], sizeof(char) * size);
+        int score = item.second;
+        file.write(reinterpret_cast<char*>(&score), sizeof(score));
+    }
+}
+
+void HighScoresScreen::updateHighScores() {
+    if (highScores.empty()) {
+        highScores.push_back(std::pair<std::string, int>(screenManager->getName(), currentScores));
+    }
 }

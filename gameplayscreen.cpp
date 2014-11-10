@@ -47,7 +47,7 @@ void GameplayScreen::update(bool otherScreenHasFocus, bool coveredByOtherScreen)
         }
 
         if (gameTimer.getTicks() >= 20000) {
-            screenManager->addScreen(std::make_shared<HighScoresScreen>());
+            screenManager->addScreen(std::make_shared<HighScoresScreen>(score));
             exited = true;
         }
 
