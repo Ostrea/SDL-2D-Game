@@ -23,6 +23,9 @@ void GameplayScreen::loadContent() {
 
 void GameplayScreen::unloadContent() {
     contentManager.unloadContent();
+    SDL_FreeSurface(nameMessage);
+    SDL_FreeSurface(timeMessage);
+    SDL_FreeSurface(scoreMessage);
 }
 
 void GameplayScreen::handleInput(const SDL_Event &event) {
@@ -48,9 +51,11 @@ void GameplayScreen::update(bool otherScreenHasFocus, bool coveredByOtherScreen)
             exited = true;
         }
 
+        SDL_FreeSurface(scoreMessage);
         std::string message = "Очки: " + std::to_string(score);
         scoreMessage = TTF_RenderUTF8_Solid(screenManager->getGameFont(), message.c_str(), textColor);
 
+        SDL_FreeSurface(timeMessage);
         message = "Время: " + std::to_string(gameTimer.getTicks() / 1000 + 1);
         timeMessage = TTF_RenderUTF8_Solid(screenManager->getGameFont(), message.c_str(), textColor);
 
@@ -170,4 +175,7 @@ GameplayScreen::GameplayScreen() {
     textColor = {255, 255, 255};
 
     gameTimer.start();
+
+    timeMessage = nullptr;
+    scoreMessage = nullptr;
 }
