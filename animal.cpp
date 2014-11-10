@@ -6,10 +6,10 @@ Animal::Animal(int x, int y, double velocityX, ContentManager const &contentMana
     velocityY = 0;
     this->velocityX = velocityX;
     alive = true;
-    collisionRectangle.x = x + 5;
-    collisionRectangle.y = y + 5;
-    collisionRectangle.w = 75;
-    collisionRectangle.h = 78;
+    collisionRectangle.x = x + 2;
+    collisionRectangle.y = y + 3;
+    collisionRectangle.w = 83;
+    collisionRectangle.h = 72;
     surface = nullptr;
 }
 
@@ -27,8 +27,8 @@ void Animal::update() {
     int screenWidth = SDL_GetVideoSurface()->w;
     x = (x % screenWidth + screenWidth) % screenWidth;
 
-    collisionRectangle.x = x + 5;
-    collisionRectangle.y = y + 5;
+    collisionRectangle.x = x + 2;
+    collisionRectangle.y = y + 3;
 }
 
 bool Animal::isAlive() const {

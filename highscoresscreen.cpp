@@ -6,7 +6,7 @@
 
 void HighScoresScreen::loadContent() {
     background = loadImage("/home/ostrea/Programs/Labs_second_term/"
-            "Gushin/Coursework_third_try/images/highscores_background.jpg");
+            "Gushin/Coursework_third_try/images/highscores_background.png");
 
 //    TODO insert new highscores in the vector using standard method and then delete last element to keep 10 elements
 //    for (int i = 0; i < NUMBER_OF_SCORES; ++i) {
@@ -52,11 +52,11 @@ void HighScoresScreen::draw() {
     SDL_Rect rect = {0, 0, 400, 600};
     applySurface(x, y, background, canvas, &rect);
 
-    x += 80;
-    y += 20;
+    x += 170;
+    y += 120;
     for (auto scoresSurface : highScoresSurfaces) {
         applySurface(x, y, scoresSurface, canvas);
-        y += 50;
+        y += 40;
     }
 }
 

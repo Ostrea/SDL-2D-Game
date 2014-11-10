@@ -18,10 +18,10 @@ Bullet::Bullet(int x, int y, double velocityY, ContentManager const &contentMana
     velocityX = 0;
     this->velocityY = velocityY;
     alive = true;
-    collisionRectangle.x = x;
+    collisionRectangle.x = x + 2;
     collisionRectangle.y = y;
-    collisionRectangle.w = 10;
-    collisionRectangle.h = 10;
+    collisionRectangle.w = 8;
+    collisionRectangle.h = 16;
 }
 
 // TODO delete after testing (base class draw does all needed work)
