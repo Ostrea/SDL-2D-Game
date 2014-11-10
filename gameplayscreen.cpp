@@ -84,7 +84,7 @@ void GameplayScreen::createAnimal() {
         std::minstd_rand0 generator(seed);
         std::uniform_int_distribution<int> distributionX(100, canvas->w - 100);
         std::uniform_int_distribution<int> distributionY(100, canvas->h - 195);
-        std::uniform_int_distribution<int> distributionVelocity(1, 2);
+        std::uniform_int_distribution<int> distributionVelocity(-2, 2);
         auto getX = std::bind(distributionX, generator);
         auto getY = std::bind(distributionY, generator);
         auto getVelocity = std::bind(distributionVelocity, generator);
