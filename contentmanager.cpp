@@ -3,13 +3,13 @@
 
 void ContentManager::loadContent() {
     background = loadImage("/home/ostrea/Programs/Labs_second_term/"
-            "Gushin/Coursework_third_try/images/nebula_brown.png");
+            "Gushin/Coursework_third_try/images/background.jpg");
     animal = loadImage("/home/ostrea/Programs/Labs_second_term/"
             "Gushin/Coursework_third_try/images/racoon.png");
     player = loadImage("/home/ostrea/Programs/Labs_second_term/"
-            "Gushin/Coursework_third_try/images/ship_without_thrusters.png");
+            "Gushin/Coursework_third_try/images/hunter.png");
     bullet = loadImage("/home/ostrea/Programs/Labs_second_term/"
-            "Gushin/Coursework_third_try/images/shot1.png");
+            "Gushin/Coursework_third_try/images/bullet.png");
 }
 
 void ContentManager::unloadContent() {

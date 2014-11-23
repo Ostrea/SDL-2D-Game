@@ -18,8 +18,6 @@ public:
 
     virtual bool initialize() override;
 
-    void shoot();
-
     int getX() const {
         return x;
     }

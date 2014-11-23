@@ -10,7 +10,7 @@ void Player::handleInput(SDL_Event const &event){
                 velocityX += ACCELERATION;
                 break;
             case SDLK_SPACE:
-                shoot();
+                createBullet();
                 break;
         }
     } else if (event.type == SDL_KEYUP) {
@@ -42,8 +42,3 @@ Player::Player(int x, int y, ContentManager const &contentManager, std::function
     velocityX = 0;
     velocityY = 0;
 }
-
-void Player::shoot() {
-    createBullet();
-}
-

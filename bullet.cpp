@@ -24,14 +24,6 @@ Bullet::Bullet(int x, int y, double velocityY, ContentManager const &contentMana
     collisionRectangle.h = 16;
 }
 
-// TODO delete after testing (base class draw does all needed work)
-void Bullet::draw() const {
-    SDL_Rect tempRect = collisionRectangle;
-    auto screen = SDL_GetVideoSurface();
-    SDL_FillRect(screen, &tempRect, SDL_MapRGB(screen->format, 255, 255, 255));
-    DrawableElement::draw();
-}
-
 bool Bullet::hasCollided(std::shared_ptr<CollideableElement> anotherElement) {
     return false;
 }

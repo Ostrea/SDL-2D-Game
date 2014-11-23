@@ -36,9 +36,6 @@ private:
     bool alive;
     SDL_Rect collisionRectangle;
     ContentManager const &contentManager;
-
-public:
-    virtual void draw() const override;
 };
 
 #endif // BULLET_H
