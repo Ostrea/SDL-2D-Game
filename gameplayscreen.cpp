@@ -156,7 +156,6 @@ int GameplayScreen::numberOfCollisionsAnimalsBullets() {
 GameplayScreen::GameplayScreen() {
     canvas = SDL_GetVideoSurface();
 
-//
     allElements.push_back(std::make_shared<Background>(0, 0, contentManager));
 
     player = std::make_shared<Player>(canvas ->w / 2 -40,
