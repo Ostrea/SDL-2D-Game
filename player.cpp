@@ -26,7 +26,7 @@ void Player::handleInput(SDL_Event const &event){
 }
 
 void Player::update() {
-    if (x + velocityX <= SDL_GetVideoSurface()->w - 90 && x + velocityX > 0 ) {
+    if (x + velocityX <= SDL_GetVideoSurface()->w - 95 && x + velocityX > -50 ) {
         x += velocityX;
     }
 }
