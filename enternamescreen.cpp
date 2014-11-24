@@ -19,9 +19,11 @@ void EnterNameScreen::handleInput(const SDL_Event &event) {
         std::string temp = text;
 
         if (text.length() <= 5) {
-            if ((event.key.keysym.unicode >= (Uint16) 'A') && (event.key.keysym.unicode <= (Uint16) 'Z')) {
+            if ((event.key.keysym.unicode >= static_cast<Uint16>('A')) &&
+                    (event.key.keysym.unicode <= static_cast<Uint16>('Z'))) {
                 text += (char) event.key.keysym.unicode;
-            } else if ((event.key.keysym.unicode >= (Uint16) 'a') && (event.key.keysym.unicode <= (Uint16) 'z')) {
+            } else if ((event.key.keysym.unicode >= static_cast<Uint16>('a')) &&
+                    (event.key.keysym.unicode <= static_cast<Uint16>('z'))) {
                 text += (char) event.key.keysym.unicode;
             }
         }
