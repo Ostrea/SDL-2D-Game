@@ -1,6 +1,5 @@
 #include "screenmanager.h"
 #include "gamescreen.h"
-#include "constants.h"
 
 void ScreenManager::loadContent(){
     menuFont = TTF_OpenFont("/home/ostrea/Programs/SOTH 2/SOTH/a_MachinaOrtoShtRegular.ttf", 30);

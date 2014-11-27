@@ -2,6 +2,7 @@
 #define ENTERNAMESCREEN_H
 
 #include "gamescreen.h"
+#include <unordered_map>
 
 class EnterNameScreen : public GameScreen {
 
@@ -18,6 +19,7 @@ public:
 
 private:
     unsigned long currentLength = 0ul;
+    std::unordered_map<Uint16, std::string> dictionary;
     std::string text;
     SDL_Surface *textSurface;
     SDL_Surface *promptSurface;
