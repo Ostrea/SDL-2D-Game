@@ -5,7 +5,8 @@
 void ScreenManager::loadContent(){
     menuFont = TTF_OpenFont("/home/ostrea/Programs/SOTH 2/SOTH/a_MachinaOrtoShtRegular.ttf", 30);
     gameFont = TTF_OpenFont("/usr/share/fonts/TTF/DejaVuSans-Bold.ttf", 10);
-    textFont = TTF_OpenFont("/usr/share/fonts/TTF/DJB Zora Prints.ttf", 25);
+//    textFont = TTF_OpenFont("/usr/share/fonts/TTF/DJB Zora Prints.ttf", 25);
+    textFont = TTF_OpenFont("/usr/share/fonts/TTF/DejaVuSans-Bold.ttf", 25);
 }
 
 void ScreenManager::unloadContent() {

@@ -17,6 +17,7 @@ public:
     virtual void draw();
 
 private:
+    unsigned long currentLength = 0ul;
     std::string text;
     SDL_Surface *textSurface;
     SDL_Surface *promptSurface;
