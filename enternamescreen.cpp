@@ -57,7 +57,7 @@ void EnterNameScreen::handleInput(const SDL_Event &event) {
     }
 
     if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_RETURN && text.size() > 0) {
-//        screenManager->setName(text);
+        screenManager->setName(text);
         screenManager->addScreen(std::make_shared<MainMenuScreen>());
         exited = true;
     }

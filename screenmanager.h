@@ -5,6 +5,7 @@
 #include <list>
 #include <SDL/SDL_events.h>
 #include <SDL/SDL_ttf.h>
+#include <vector>
 
 class GameScreen;
 
@@ -45,12 +46,12 @@ public:
         this->needToExit = needToExit;
     }
 
-    std::string getName() const {
+    std::vector<Uint16> const &getName() const {
         return name;
     }
 
-    void setName(std::string name) {
-        this->name = name;
+    void setName(std::vector<Uint16> const &name) {
+        ScreenManager::name = name;
     }
 
 private:
@@ -61,7 +62,7 @@ private:
     TTF_Font *textFont;
 
     bool needToExit = false;
-    std::string name;
+    std::vector<Uint16> name;
 };
 
 #endif // SCREENMANAGER_H

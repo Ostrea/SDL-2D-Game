@@ -8,12 +8,6 @@ void HighScoresScreen::loadContent() {
     background = loadImage("/home/ostrea/Programs/Labs_second_term/"
             "Gushin/Coursework_third_try/images/highscores_background.png");
 
-//    TODO insert new highscores in the vector using standard method and then delete last element to keep 10 elements
-//    for (int i = 0; i < NUMBER_OF_SCORES; ++i) {
-//        highScores.push_back(std::pair<std::string, int>("Ostrea", 0));
-//    }
-//
-
     readHighScores();
 
     if (overwrite) {
