@@ -17,8 +17,8 @@ void GameplayScreen::loadContent() {
         }
     }
 
-    nameMessage = TTF_RenderUTF8_Solid(screenManager->getGameFont(),
-            screenManager->getName().c_str(), textColor);
+    nameMessage = TTF_RenderUNICODE_Solid(screenManager->getGameFont(),
+            screenManager->getName().data(), textColor);
 }
 
 void GameplayScreen::unloadContent() {

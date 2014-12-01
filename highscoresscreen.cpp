@@ -2,7 +2,6 @@
 #include "functions.h"
 #include <fstream>
 #include <iostream>
-#include <stdexcept>
 
 void HighScoresScreen::loadContent() {
     background = loadImage("/home/ostrea/Programs/Labs_second_term/"
@@ -14,15 +13,24 @@ void HighScoresScreen::loadContent() {
         updateHighScores();
     }
 
+    TTF_Font *gameFont = screenManager->getGameFont();
     for (auto score : highScores) {
-        std::string message = score.first + " : " + std::to_string(score.second);
-        highScoresSurfaces.push_back(TTF_RenderUTF8_Solid(screenManager->getGameFont(),
-                message.c_str(), textColor));
+        std::vector<Uint16> message(std::begin(score.first), std::end(score.first) - 1);
+        message.push_back(':');
+        message.push_back('\0');
+
+        highScoresNameSurfaces.push_back(TTF_RenderUNICODE_Solid(gameFont,
+                message.data(), textColor));
+        highScoresPointsSurfaces.push_back(TTF_RenderUTF8_Solid(gameFont,
+                std::to_string(score.second).c_str(), textColor));
     }
 }
 
 void HighScoresScreen::unloadContent() {
-    for (auto surface : highScoresSurfaces) {
+    for (auto surface : highScoresNameSurfaces) {
+        SDL_FreeSurface(surface);
+    }
+    for (auto surface : highScoresPointsSurfaces) {
         SDL_FreeSurface(surface);
     }
     SDL_FreeSurface(background);
@@ -48,10 +56,11 @@ void HighScoresScreen::draw() {
 
     x += 170;
     y += 120;
-    for (auto scoresSurface : highScoresSurfaces) {
-        applySurface(x, y, scoresSurface, canvas);
+    for (int i = 0; i < highScores.size(); ++i) {
+        applySurface(x, y, highScoresNameSurfaces.at(i), canvas);
+        applySurface(x + 60, y, highScoresPointsSurfaces.at(i), canvas);
         y += 40;
-    }
+        }
 }
 
 HighScoresScreen::HighScoresScreen() {
@@ -60,8 +69,8 @@ HighScoresScreen::HighScoresScreen() {
     overwrite = false;
 }
 
-HighScoresScreen::HighScoresScreen(int currentScores) :
-        currentScores(currentScores) {
+HighScoresScreen::HighScoresScreen(int currentScores) {
+    this->currentScores = static_cast<Uint16>(currentScores);
     popup = true;
     overwrite = true;
 }
@@ -79,12 +88,13 @@ void HighScoresScreen::readHighScores() {
         for (int i = 0; i < numberOfElements; ++i) {
             unsigned long size;
             file.read(reinterpret_cast<char*>(&size), sizeof(size));
-            char string[size];
-            file.read(&string[0], sizeof(char) * size);
-            int score;
+            Uint16 string[size];
+            file.read(reinterpret_cast<char*>(string), sizeof(Uint16) * size);
+            Uint16 score;
             file.read(reinterpret_cast<char*>(&score), sizeof(score));
 
-            highScores.push_back(std::pair<std::string, int>(string, score));
+            highScores.push_back(std::pair<std::vector<Uint16>, Uint16>(std::vector<Uint16>
+                    (string, string + size), score));
         }
     }
 }
@@ -99,24 +109,25 @@ void HighScoresScreen::writeHighScores() {
     unsigned long numberOfElements = highScores.size();
     file.write(reinterpret_cast<char*>(&numberOfElements), sizeof(numberOfElements));
     for (auto item : highScores) {
-        unsigned long size = item.first.size() + 1;
+        unsigned long size = item.first.size();
         file.write(reinterpret_cast<char*>(&size), sizeof(size));
-        auto string = item.first.c_str();
-        file.write(&string[0], sizeof(char) * size);
-        int score = item.second;
+        auto string = item.first.data();
+        file.write(reinterpret_cast<char*>(string), sizeof(Uint16) * size);
+        Uint16 score = item.second;
         file.write(reinterpret_cast<char*>(&score), sizeof(score));
     }
 }
 
 void HighScoresScreen::updateHighScores() {
     if (highScores.empty()) {
-        highScores.push_back(std::pair<std::string, int>(screenManager->getName(), currentScores));
+        highScores.push_back(std::pair<std::vector<Uint16>, Uint16>(screenManager->getName(), currentScores));
     } else {
         auto currentPosition = highScores.begin();
         while (currentPosition->second > currentScores && currentPosition != highScores.end()) {
             currentPosition++;
         }
-        highScores.insert(currentPosition, std::pair<std::string, int>(screenManager->getName(), currentScores));
+        highScores.insert(currentPosition, std::pair<std::vector<Uint16>, Uint16>
+                (screenManager->getName(), currentScores));
 
         if (highScores.size() > NUMBER_OF_SCORES) {
             highScores.pop_back();

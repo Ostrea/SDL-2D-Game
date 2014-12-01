@@ -23,8 +23,8 @@ void MainMenuScreen::loadContent(){
         exited = true;
     }));
 
-    nameSurface = TTF_RenderUTF8_Solid(screenManager->getTextFont(),
-            screenManager->getName().c_str(), {0x9A, 0xCD, 0x32});
+    nameSurface = TTF_RenderUNICODE_Solid(screenManager->getTextFont(),
+            screenManager->getName().data(), {0x9A, 0xCD, 0x32});
 }
 
 void MainMenuScreen::unloadContent() {
