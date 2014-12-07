@@ -3,10 +3,11 @@
 #include "gameplayscreen.h"
 #include "highscoresscreen.h"
 #include "enternamescreen.h"
+#include "helpscreen.h"
 
 void MainMenuScreen::loadContent(){
     int x = SDL_GetVideoSurface()->w / 2 - 80;
-    int y = 100;
+    int y = 50;
     TTF_Font *font = screenManager->getMenuFont();
 
     menuEntries.push_back(MenuEntry("Играть", font, x, y, [this] {
@@ -19,7 +20,10 @@ void MainMenuScreen::loadContent(){
         screenManager->addScreen(std::make_shared<EnterNameScreen>());
         exited = true;
     }));
-    menuEntries.push_back(MenuEntry("Выход", font, x, y + 300, [this] {
+    menuEntries.push_back(MenuEntry("Помощь", font, x, y + 300, [this] {
+        screenManager->addScreen(std::make_shared<HelpScreen>());
+    }));
+    menuEntries.push_back(MenuEntry("Выход", font, x, y + 400, [this] {
         exited = true;
     }));
 
@@ -34,5 +38,5 @@ void MainMenuScreen::unloadContent() {
 void MainMenuScreen::draw() {
     MenuScreen::draw();
     auto canvas = SDL_GetVideoSurface();
-    applySurface(canvas->w / 2 - 80, 500, nameSurface, canvas);
+    applySurface(canvas->w / 2 - 80, 550, nameSurface, canvas);
 }

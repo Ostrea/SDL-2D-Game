@@ -26,6 +26,7 @@ private:
     std::vector<SDL_Surface*> highScoresPointsSurfaces;
     SDL_Color textColor = {0, 0, 0};
     SDL_Surface *background;
+    SDL_Surface *button;
     bool overwrite;
     Uint16 currentScores;
 

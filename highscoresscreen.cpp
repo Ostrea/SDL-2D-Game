@@ -24,6 +24,7 @@ void HighScoresScreen::loadContent() {
         highScoresPointsSurfaces.push_back(TTF_RenderUTF8_Solid(gameFont,
                 std::to_string(score.second).c_str(), textColor));
     }
+    button = TTF_RenderUTF8_Solid(screenManager->getMenuFont(), "Ок", {0xFF, 0x99, 0x33});
 }
 
 void HighScoresScreen::unloadContent() {
@@ -34,7 +35,7 @@ void HighScoresScreen::unloadContent() {
         SDL_FreeSurface(surface);
     }
     SDL_FreeSurface(background);
-
+    SDL_FreeSurface(button);
     if (overwrite) {
         writeHighScores();
     }
@@ -60,7 +61,8 @@ void HighScoresScreen::draw() {
         applySurface(x, y, highScoresNameSurfaces.at(i), canvas);
         applySurface(x + 60, y, highScoresPointsSurfaces.at(i), canvas);
         y += 40;
-        }
+    }
+    applySurface(700, 550, button, canvas);
 }
 
 HighScoresScreen::HighScoresScreen() {
