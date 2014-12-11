@@ -14,13 +14,15 @@ void HelpScreen::loadContent() {
     text.push_back(TTF_RenderUTF8_Solid(font, "вправо", color));
     text.push_back(TTF_RenderUTF8_Solid(font, "p - пауза", color));
     text.push_back(TTF_RenderUTF8_Solid(font, "esc - выйти из игры", color));
-    text.push_back(TTF_RenderUTF8_Solid(screenManager->getMenuFont(), "Ок", {0xFF, 0x99, 0x33}));
+    background = loadImage("/home/ostrea/Programs/Labs_second_term/Gushin/"
+            "Coursework_third_try/images/help_backgound.png");
 }
 
 void HelpScreen::unloadContent() {
     for (auto surface : text) {
         SDL_FreeSurface(surface);
     }
+    SDL_FreeSurface(background);
 }
 
 void HelpScreen::handleInput(SDL_Event const & event){
@@ -31,11 +33,9 @@ void HelpScreen::handleInput(SDL_Event const & event){
 
 void HelpScreen::draw() {
     auto canvas = SDL_GetVideoSurface();
-    Sint16 x = 160;
-    Sint16 y = 20;
-    SDL_Rect rect = {x, y, 460, 570};
-    SDL_FillRect(canvas, &rect, SDL_MapRGB(canvas->format, 0, 0, 0));
-
+    int x = 160;
+    int y = 20;
+    applySurface(x, y, background, canvas);
     x += 20;
     y += 20;
     for (auto surface : text) {

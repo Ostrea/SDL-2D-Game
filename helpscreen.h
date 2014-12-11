@@ -20,6 +20,7 @@ public:
 
 private:
     std::vector<SDL_Surface*> text;
+    SDL_Surface *background;
 };
 
 #endif // HELPSCREEN_H
