@@ -54,6 +54,8 @@ public:
         ScreenManager::name = name;
     }
 
+    void closePreviousScreen();
+
 private:
     std::list<std::shared_ptr<GameScreen>> screens;
 

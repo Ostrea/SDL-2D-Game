@@ -71,3 +71,9 @@ void ScreenManager::handleEvents(const SDL_Event &event) {
     auto screen = screens.back();
     screen->handleInput(event);
 }
+
+void ScreenManager::closePreviousScreen() {
+    auto neededScreen = --screens.end();
+    neededScreen--;
+    (*neededScreen)->setExited(true);
+}

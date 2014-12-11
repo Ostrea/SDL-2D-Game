@@ -40,6 +40,10 @@ public:
         return exited;
     }
 
+    void setExited(bool exited) {
+        this->exited = exited;
+    }
+
 protected:
     bool otherScreenHasFocus;
     bool exited;

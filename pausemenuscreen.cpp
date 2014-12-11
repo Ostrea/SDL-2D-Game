@@ -10,7 +10,9 @@ void PauseMenuScreen::loadContent(){
         exited = true;
     }));
     menuEntries.push_back(MenuEntry("Выход", font, x, y + 100, [this] {
-        screenManager->setNeedToExit(true);
+//        screenManager->setNeedToExit(true);
+        exited = true;
+        screenManager->closePreviousScreen();
     }));
 }
 
