@@ -29,7 +29,8 @@ void EnterNameScreen::handleInput(const SDL_Event &event) {
                     ((unicodeCode >= static_cast<Uint16>(u'А')) &&
                     (unicodeCode <= static_cast<Uint16>(u'я'))) ||
                     ((unicodeCode == static_cast<Uint16>(u'Ё')) ||
-                    (unicodeCode == static_cast<Uint16>(u'ё')))) {
+                    (unicodeCode == static_cast<Uint16>(u'ё'))) ||
+                    unicodeCode == ' ') {
 
                 if (!text.empty()) {
                     text.pop_back();
